@@ -5,6 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MainTest {
     @Test
     void testMain(){
-        assertTrue(true);
+        assertTrue(false);
     }
 }
