@@ -17,8 +17,8 @@ permissions:
   contents: write
 
 jobs:
-  build:
 
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,21 +28,19 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-    - name: Build with Gradle
+    - name: Setup Gradle
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-      with:
-        arguments: -x test build
-  test:
+    - name: Execute Gradle Build
+      run: ./gradlew -x test build
 
+  test:
     runs-on: ubuntu-latest
     needs: build
     if: ${{ always() }}
 
     steps:
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-        with:
-          arguments: test
+      - name: Execute Gradle tests
+        run: ./gradlew test
 
       - name: Archive Test Results
         uses: actions/upload-artifact@v2
