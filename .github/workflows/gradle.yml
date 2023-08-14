@@ -40,6 +40,7 @@ jobs:
       run: ./gradlew test
 
     - name: Archive Test Results
+      # Repetir el condicional en cada paso subsiguiente no está bueno
       if: '!cancelled()'
       uses: actions/upload-artifact@v2
       with:
@@ -47,6 +48,7 @@ jobs:
         path: build/reports/tests/test/
 
     - name: Download Test Results
+      # Repetir el condicional en cada paso subsiguiente no está bueno
       if: '!cancelled()'
       uses: actions/download-artifact@v2
       with:
@@ -54,6 +56,7 @@ jobs:
         path: test-results
 
     - name: Publish Test Results as Github Pages
+      # Repetir el condicional en cada paso subsiguiente no está bueno
       if: '!cancelled()'
       uses: peaceiris/actions-gh-pages@v3
       with:
