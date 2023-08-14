@@ -37,10 +37,10 @@ jobs:
       run: ./gradlew -x test build
 
     - name: Execute Gradle tests
-      if: '!cancelled()'
       run: ./gradlew test
 
     - name: Archive Test Results
+      if: '!cancelled()'
       uses: actions/upload-artifact@v2
       with:
         name: test-results
