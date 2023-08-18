@@ -9,7 +9,7 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "test/**"]
   pull_request:
     branches: [ "master" ]
 
@@ -17,39 +17,47 @@ permissions:
   contents: write
 
 jobs:
-  build:
 
+  build:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:
         java-version: '11'
         distribution: 'temurin'
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-      with:
-        arguments: build
-  test:
 
-    runs-on: ubuntu-latest
-  
-    steps:
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
+
+    - name: Execute Gradle Build
+      run: ./gradlew -x test build
+
+    - name: Execute Gradle tests
+      run: ./gradlew test
+
     - name: Archive Test Results
+      # Repetir el condicional en cada paso subsiguiente no está bueno
+      if: '!cancelled()'
       uses: actions/upload-artifact@v2
       with:
         name: test-results
         path: build/reports/tests/test/
-  
+
     - name: Download Test Results
+      # Repetir el condicional en cada paso subsiguiente no está bueno
+      if: '!cancelled()'
       uses: actions/download-artifact@v2
       with:
         name: test-results
         path: test-results
-    
+
     - name: Publish Test Results as Github Pages
+      # Repetir el condicional en cada paso subsiguiente no está bueno
+      if: '!cancelled()'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
