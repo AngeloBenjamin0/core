@@ -23,12 +23,4 @@ public class ControladorTemperatura {
     public void attach(PropertyChangeListener propertyChangeListener){
         propertyChangeSupport.addPropertyChangeListener(propertyChangeListener);
     }
-
-    public int establecer(String id, int temperatura){
-        // TODO: Este método será eliminado más avanzado el proyecto.
-        // La existencia del mismo es sólo para tener un método que sea utilizado desde la vista y el controlador
-        propertyChangeSupport.firePropertyChange("temperatura", temperatura, temperatura + 1); // FIXME: Cambiar estos valores. Son totalmente arbitrarios. No siguen ninguna regla.
-        return this.establecer(new Dispositivo(id), temperatura);
-    }
-
 }

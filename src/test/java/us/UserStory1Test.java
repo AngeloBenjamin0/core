@@ -7,13 +7,14 @@ import org.pp2.Dispositivo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+
 public class UserStory1Test {
 
     ControladorTemperatura controlador = new ControladorTemperatura();
 
     @Test
     void testHappyPath(){
-        Dispositivo dispositivo = new Dispositivo("Dispositivo 1");
+        Dispositivo dispositivo = new Dispositivo("d1", "Dispositivo 1", "Samsung");
         int temperatura = 18;
 
         int temperaturaEstablecida = controlador.establecer(dispositivo, temperatura);
@@ -23,7 +24,7 @@ public class UserStory1Test {
 
     @Test
     void testTemperaturaNoPermitida(){
-        Dispositivo dispositivo = new Dispositivo("Dispositivo 2");
+        Dispositivo dispositivo = new Dispositivo("d2", "Dispositivo 2", "Google Nest");
         int temperatura = 34;
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
