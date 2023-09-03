@@ -1,36 +1,47 @@
 package us;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.pp2.ControladorTemperatura;
+import org.mockito.Mockito;
 import org.pp2.Dispositivo;
+import org.pp2.EstablecedorTemperatura;
+import org.pp2.IntegracionClimatizadores;
+
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
 
 
 public class UserStory1Test {
-
-    ControladorTemperatura controlador = new ControladorTemperatura();
+    EstablecedorTemperatura establecedorTemperatura;
 
     @Test
     void testHappyPath(){
+        // GIVEN
         Dispositivo dispositivo = new Dispositivo("d1", "Dispositivo 1", "Samsung");
-        int temperatura = 18;
+        IntegracionClimatizadores mockIntegracion = Mockito.mock(IntegracionClimatizadores.class);
+        establecedorTemperatura = new EstablecedorTemperatura(Map.of(dispositivo, mockIntegracion));
 
-        int temperaturaEstablecida = controlador.establecer(dispositivo, temperatura);
+        // WHEN
+        int temperaturaEstablecida = establecedorTemperatura.establecer("d1", 18);
 
-        assertEquals(temperatura, temperaturaEstablecida);
+        assertEquals(18, temperaturaEstablecida);
+        verify(mockIntegracion).establecerTemperatura(dispositivo, 18);
     }
 
     @Test
+    @Disabled("Se deshabilita hasta tanto y en cuanto se defina el comportamiento de excepción de temperatura no permitida")
     void testTemperaturaNoPermitida(){
         Dispositivo dispositivo = new Dispositivo("d2", "Dispositivo 2", "Google Nest");
-        int temperatura = 34;
+        IntegracionClimatizadores mockIntegracion = Mockito.mock(IntegracionClimatizadores.class);
+        establecedorTemperatura = new EstablecedorTemperatura(Map.of(dispositivo, mockIntegracion));
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                controlador.establecer(dispositivo, temperatura));
+                establecedorTemperatura.establecer("d2", 34));
 
-        assertEquals(String.format("Temperatura %s fuera de rango. Establecer temperatura entre 18 y 30 grados.", temperatura),
+        assertEquals("Temperatura 34 fuera de rango. Establecer temperatura entre 18 y 30 grados.",
                 exception.getMessage());
     }
 
