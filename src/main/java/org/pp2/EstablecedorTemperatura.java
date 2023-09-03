@@ -13,9 +13,9 @@ public class EstablecedorTemperatura {
     private final String PROPERTY_NAME = "temperatura";
     private final PropertyChangeSupport propertyChangeSupport;
     private final Map<String, Dispositivo> idDispositivosMap;
-    private final Map<Dispositivo, IntegracionClimatizadores> dispositivoIntegracionClimatizadorMap;
+    private final Map<Dispositivo, IntegracionClimatizador> dispositivoIntegracionClimatizadorMap;
 
-    public EstablecedorTemperatura(Map<Dispositivo, IntegracionClimatizadores> dispositivoIntegracionClimatizadorMap) {
+    public EstablecedorTemperatura(Map<Dispositivo, IntegracionClimatizador> dispositivoIntegracionClimatizadorMap) {
         this.dispositivoIntegracionClimatizadorMap = dispositivoIntegracionClimatizadorMap;
         this.idDispositivosMap = dispositivoIntegracionClimatizadorMap.keySet().stream().collect(toMap(Dispositivo::getId, Function.identity()));
         this.propertyChangeSupport = new PropertyChangeSupport(this);

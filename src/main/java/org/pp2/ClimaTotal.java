@@ -20,9 +20,9 @@ public class ClimaTotal {
                 }
         );
 
-        Map<Dispositivo, IntegracionClimatizadores> dispositivoIntegracionClimatizadoresMap = dispositivos
+        Map<Dispositivo, IntegracionClimatizador> dispositivoIntegracionClimatizadoresMap = dispositivos
                 .stream()
-                .collect(toMap(Function.identity(), dispositivo -> new DefaultIntegracionClimatizadores()));
+                .collect(toMap(Function.identity(), dispositivo -> new DefaultIntegracionClimatizador()));
 
         return new EstablecedorTemperatura(dispositivoIntegracionClimatizadoresMap);
     }
