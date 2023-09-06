@@ -182,6 +182,7 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 ### Java ###
+#
 # Compiled class file
 *.class
 
@@ -233,5 +234,8 @@ gradle-app.setting
 ### Gradle Patch ###
 # Java heap dump
 *.hprof
+
+## Allow all from libs/
+!libs/*
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,gradle,java,eclipse
