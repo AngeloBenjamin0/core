@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -20,9 +21,18 @@ public class ClimaTotal {
                 }
         );
 
+        List<IntegracionClimatizador> integraciones;
+        try {
+            integraciones = new IntegracionClimatizadorDiscoverer().discover("libs/");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                 InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+
+        IntegracionClimatizador integracionClimatizador = integraciones.get(0);
         Map<Dispositivo, IntegracionClimatizador> dispositivoIntegracionClimatizadoresMap = dispositivos
                 .stream()
-                .collect(toMap(Function.identity(), dispositivo -> new DefaultIntegracionClimatizador()));
+                .collect(toMap(Function.identity(), dispositivo -> integracionClimatizador));
 
         return new EstablecedorTemperatura(dispositivoIntegracionClimatizadoresMap);
     }

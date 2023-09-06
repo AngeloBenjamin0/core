@@ -7,7 +7,6 @@ public class Main {
         String dispositivoConfigFile = args[0];
         String dispositivoId = args[1];
         int temperatura = Integer.parseInt(args[2]);
-
         ClimaTotal.init(dispositivoConfigFile).establecer(dispositivoId, temperatura);
     }
 }
