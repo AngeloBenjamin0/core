@@ -1,6 +1,6 @@
 package org.pp2;
 
-public class DefaultIntegracionClimatizador implements IntegracionClimatizador {
+public class DefaultDriverClimatizador implements DriverClimatizador {
     @Override
     public void establecerTemperatura(Dispositivo dispositivo, int temperatura) {
         System.out.printf("Estableciendo temperatura del dispositivo llamado \"%s\" modelo \"%s\" a %s grados%n",

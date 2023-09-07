@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.pp2.Dispositivo;
+import org.pp2.DriverClimatizador;
 import org.pp2.EstablecedorTemperatura;
-import org.pp2.IntegracionClimatizador;
 
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public class UserStory1Test {
     void testHappyPath(){
         // GIVEN
         Dispositivo dispositivo = new Dispositivo("d1", "Dispositivo 1", "Samsung");
-        IntegracionClimatizador mockIntegracion = Mockito.mock(IntegracionClimatizador.class);
+        DriverClimatizador mockIntegracion = Mockito.mock(DriverClimatizador.class);
         establecedorTemperatura = new EstablecedorTemperatura(Map.of(dispositivo, mockIntegracion));
 
         // WHEN
@@ -35,7 +35,7 @@ public class UserStory1Test {
     @Disabled("Se deshabilita hasta tanto y en cuanto se defina el comportamiento de excepción de temperatura no permitida")
     void testTemperaturaNoPermitida(){
         Dispositivo dispositivo = new Dispositivo("d2", "Dispositivo 2", "Google Nest");
-        IntegracionClimatizador mockIntegracion = Mockito.mock(IntegracionClimatizador.class);
+        DriverClimatizador mockIntegracion = Mockito.mock(DriverClimatizador.class);
         establecedorTemperatura = new EstablecedorTemperatura(Map.of(dispositivo, mockIntegracion));
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->

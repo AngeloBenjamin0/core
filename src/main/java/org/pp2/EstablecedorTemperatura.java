@@ -13,11 +13,11 @@ public class EstablecedorTemperatura {
     private final String PROPERTY_NAME = "temperatura";
     private final PropertyChangeSupport propertyChangeSupport;
     private final Map<String, Dispositivo> idDispositivosMap;
-    private final Map<Dispositivo, IntegracionClimatizador> dispositivoIntegracionClimatizadorMap;
+    private final Map<Dispositivo, DriverClimatizador> dispositivoDriverClimatizadorMap;
 
-    public EstablecedorTemperatura(Map<Dispositivo, IntegracionClimatizador> dispositivoIntegracionClimatizadorMap) {
-        this.dispositivoIntegracionClimatizadorMap = dispositivoIntegracionClimatizadorMap;
-        this.idDispositivosMap = dispositivoIntegracionClimatizadorMap.keySet().stream().collect(toMap(Dispositivo::getId, Function.identity()));
+    public EstablecedorTemperatura(Map<Dispositivo, DriverClimatizador> dispositivoDriverClimatizadorMap) {
+        this.dispositivoDriverClimatizadorMap = dispositivoDriverClimatizadorMap;
+        this.idDispositivosMap = dispositivoDriverClimatizadorMap.keySet().stream().collect(toMap(Dispositivo::getId, Function.identity()));
         this.propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
@@ -25,7 +25,7 @@ public class EstablecedorTemperatura {
         Dispositivo dispositivo = idDispositivosMap.get(dispositivoId);
         if (dispositivo == null) throw new IllegalArgumentException(String.format("Dispositivo con id %s no encontrado", dispositivoId));
 
-        dispositivoIntegracionClimatizadorMap.get(dispositivo).establecerTemperatura(dispositivo, temperatura);
+        dispositivoDriverClimatizadorMap.get(dispositivo).establecerTemperatura(dispositivo, temperatura);
         // FIXME: Esto no parece estar del todo bien. Me quedan dudas de si este método deba devolver algo
         this.propertyChangeSupport.firePropertyChange(PROPERTY_NAME, temperatura, temperatura);
         return temperatura;

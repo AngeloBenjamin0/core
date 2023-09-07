@@ -1,5 +1,5 @@
 package org.pp2;
 
-public interface IntegracionClimatizador {
+public interface DriverClimatizador {
     void establecerTemperatura(Dispositivo dispositivo, int temperatura);
 }
