@@ -21,18 +21,18 @@ public class ClimaTotal {
                 }
         );
 
-        List<DriverClimatizador> drivers;
+        List<DriverClimatizadorFactory> drivers;
         try {
-            drivers = new DriverClimatizadorDiscoverer().discover("libs/");
+            drivers = new DriverClimatizadorFactoryDiscoverer().discover("libs/");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException |
                  InvocationTargetException e) {
             throw new RuntimeException(e);
         }
 
-        DriverClimatizador driverClimatizador = drivers.get(0);
+        DriverClimatizadorFactory driverClimatizador = drivers.get(0);
         Map<Dispositivo, DriverClimatizador> dispositivoDriverClimatizadorMap = dispositivos
                 .stream()
-                .collect(toMap(Function.identity(), dispositivo -> driverClimatizador));
+                .collect(toMap(Function.identity(), dispositivo -> driverClimatizador.create()));
 
         return new EstablecedorTemperatura(dispositivoDriverClimatizadorMap);
     }
