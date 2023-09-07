@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+// TODO: Tengo dudas sobre esta clase. No me queda claro si YAGNI, ya que ObjectMapper hace exactamente el mismo trabajo.
 public class DispositivoMapper {
     private final File dispositivoJsonFile;
 
