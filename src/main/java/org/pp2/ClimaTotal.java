@@ -1,10 +1,5 @@
 package org.pp2;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,14 +8,8 @@ import java.util.stream.Collectors;
 
 public class ClimaTotal {
 
-    public static EstablecedorTemperatura init(String dispositivosJsonConfigPath) throws IOException {
-        // TODO: Refactorizar a una clase aparte.
-        List<Dispositivo> dispositivos = new ObjectMapper().readValue(
-                new File(dispositivosJsonConfigPath),
-                new TypeReference<>() {
-                }
-        );
-
+    public static EstablecedorTemperatura init(String dispositivosJsonConfigPath){
+        List<Dispositivo> dispositivos = new DispositivoMapper(dispositivosJsonConfigPath).getDispositivos();
         Set<DriverClimatizadorFactory> drivers = new DriverClimatizadorFactoryDiscoverer().discover("libs/");
 
         // TODO: Refactorizar en una clase aparte
