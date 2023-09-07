@@ -2,13 +2,15 @@ package org.pp2;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 public class DriverClimatizadorFactoryDiscoverer {
 
-    public List<DriverClimatizadorFactory> discover(String path) {
-        List<DriverClimatizadorFactory> result = new ArrayList<>();
+    public Set<DriverClimatizadorFactory> discover(String path) {
+        // FIXME: Tenemos que emprolijar este código. Sobre todo el manejo de excepciones
+        Set<DriverClimatizadorFactory> result = new HashSet<>();
         for (File f : Objects.requireNonNull(new File(path).listFiles())) {
             if (!f.getName().endsWith(".class")) continue;
             Class<?> cls;
