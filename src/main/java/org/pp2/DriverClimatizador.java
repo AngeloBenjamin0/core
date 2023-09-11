@@ -1,5 +1,6 @@
 package org.pp2;
 
 public interface DriverClimatizador {
-    void establecerTemperatura(Dispositivo dispositivo, int temperatura);
+    void apagar(Dispositivo dispositivo);
+    void encender(Dispositivo dispositivo);
 }

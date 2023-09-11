@@ -1,10 +1,20 @@
 package org.pp2;
 
+import java.util.List;
+import java.util.Optional;
+
 public class Main {
     public static void main(String[] args){
-        String dispositivoJsonConfigPath = args[0];
-        String dispositivoId = args[1];
-        int temperatura = Integer.parseInt(args[2]);
-        ClimaTotal.init(dispositivoJsonConfigPath).establecer(dispositivoId, temperatura);
+        String dispositivoJsonPath = args[0];
+        String comandosValidosJsonPath = args[1];
+        String dispositivoId = args[2];
+        String comando = args[3];
+        List<Dispositivo> dispositivos = ClimaTotal.init(dispositivoJsonPath, comandosValidosJsonPath);
+
+        Optional<Dispositivo> dispositivo = dispositivos.stream().filter(d -> d.getId().equals(dispositivoId)).findAny();
+
+        if (dispositivo.isEmpty()) throw new RuntimeException(String.format("No se encuentra el dispositivo %s", dispositivoId));
+        dispositivo.get().ejecutar(comando);
+
     }
 }
