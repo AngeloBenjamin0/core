@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class ClimaTotal {
 
-    public static List<Dispositivo> init(String dispositivosJsonPath, String comandosValidosJsonPath){ //FIXME: Si devuelve una lista de Dispositivos, entonces no se puede llamar init
+    public static List<Dispositivo> inicializarDispositivos(String dispositivosJsonPath, String comandosValidosJsonPath){
         List<Dispositivo> dispositivos = new DispositivoMapper(dispositivosJsonPath).getDispositivos();
         Set<String> comandosValidos;
         try {
@@ -26,10 +26,10 @@ public class ClimaTotal {
         dispositivos.forEach(dispositivo -> {
             List<DriverClimatizadorFactory> driversCompatibles = driverClimatizadorFactories.stream().filter(driver -> driver.isCompatible(dispositivo)).collect(Collectors.toList());
             if (!driversCompatibles.isEmpty()) {
-                dispositivo.setComandosAceptables(comandosValidos);
+//                dispositivo.setComandosAceptables(comandosValidos);
                 // En caso de haber más de un driver compatible con un dispositivo, entonces tomamos el primero.
 //                dispositivo.setDriverClimatizador(driversCompatibles.get(0).create());
-                dispositivo.setDriverClimatizador(new DefaultDriverClimatizador());
+//                dispositivo.setDriverClimatizador(new DefaultDriverClimatizador());
             }
         });
 

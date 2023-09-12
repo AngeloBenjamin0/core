@@ -9,7 +9,7 @@ public class Main {
         String comandosValidosJsonPath = args[1];
         String dispositivoId = args[2];
         String comando = args[3];
-        List<Dispositivo> dispositivos = ClimaTotal.init(dispositivoJsonPath, comandosValidosJsonPath);
+        List<Dispositivo> dispositivos = ClimaTotal.inicializarDispositivos(dispositivoJsonPath, comandosValidosJsonPath);
 
         Optional<Dispositivo> dispositivo = dispositivos.stream().filter(d -> d.getId().equals(dispositivoId)).findAny();
 

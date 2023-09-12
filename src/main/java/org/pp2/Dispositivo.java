@@ -1,9 +1,10 @@
 package org.pp2;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Set;
+import org.pp2.comando.Comando;
+import org.pp2.comando.Interprete;
 
 @Data
 @NoArgsConstructor
@@ -12,19 +13,9 @@ public class Dispositivo {
     private String id;
     private String nombre;
     private String modelo;
-    private DriverClimatizador driverClimatizador; //FIXME: El dispositivo no debería conocer su Driver
-    private Set<String> comandosAceptables; //FIXME El dispositivo no debería conocer los comandos aceptables;
-
+    private Interprete interprete; //FIXME Es raro que un Dispositivo tengo un interprete.
 
     public void ejecutar(String comando){
-        if (!comandosAceptables.contains(comando)) throw new IllegalArgumentException("Comando no aceptado");
-
-        //FIXME: Esto claramente también tiene que ser refactorizado.
-        switch (comando){
-            case "ENCENDER" : driverClimatizador.encender(this); break;
-            case "APAGAR" : driverClimatizador.apagar(this); break;
-            default: throw new IllegalArgumentException("El dispositivo no acepta el comando solicitado");
-        }
-
+        interprete.ejecutar(this, new Comando(comando));
     }
 }
