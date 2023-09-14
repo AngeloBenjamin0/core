@@ -6,10 +6,9 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args){
         String dispositivoJsonPath = args[0];
-        String comandosValidosJsonPath = args[1];
-        String dispositivoId = args[2];
-        String comando = args[3];
-        List<Dispositivo> dispositivos = ClimaTotal.inicializarDispositivos(dispositivoJsonPath, comandosValidosJsonPath);
+        String dispositivoId = args[1];
+        String comando = args[2];
+        List<Dispositivo> dispositivos = ClimaTotal.inicializarDispositivos(dispositivoJsonPath);
 
         Optional<Dispositivo> dispositivo = dispositivos.stream().filter(d -> d.getId().equals(dispositivoId)).findAny();
 
