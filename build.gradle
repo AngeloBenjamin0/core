@@ -24,7 +24,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.28'
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
-    implementation name: 'pp2-extension-1-1.1'
 
     testImplementation 'org.mockito:mockito-junit-jupiter:5.3.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
