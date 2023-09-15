@@ -14,18 +14,17 @@ US Extensiblidad: Quiero agregar un climatizador
  */
 public class UserStory2Test {
     final int EMPTY_SIZE = 0;
+    final static String PATH_VACIO = System.getProperty("user.dir") + "\\src\\test\\resources\\resources_vacio";
+    final static String PATH_SIN_CLIMATIZADOR = System.getProperty("user.dir") + "\\src\\test\\resources";
     @Test
     void testDriverClimatizadorInexistente(){
-
-        final String PATH_WITHOUT_CLASS = System.getProperty("user.dir") + "\\src\\main\\resources";
-        Set<DriverClimatizadorFactory> climatizadorFactorySet = new DriverClimatizadorFactoryDiscoverer().discover(PATH_WITHOUT_CLASS);
+        Set<DriverClimatizadorFactory> climatizadorFactorySet = new DriverClimatizadorFactoryDiscoverer().discover(PATH_VACIO);
         assertEquals(EMPTY_SIZE, climatizadorFactorySet.size());
     }
 
     @Test
     void testDriverClimatizadorInvalido(){
-        final String PATH_WITHOUT_CLIMATIZADOR = System.getProperty("user.dir") + "\\src\\test\\java\\climatizador_invalido_lib";
-        Set<DriverClimatizadorFactory> climatizadorFactorySet = new DriverClimatizadorFactoryDiscoverer().discover(PATH_WITHOUT_CLIMATIZADOR);
+        Set<DriverClimatizadorFactory> climatizadorFactorySet = new DriverClimatizadorFactoryDiscoverer().discover(PATH_SIN_CLIMATIZADOR);
         assertEquals(EMPTY_SIZE, climatizadorFactorySet.size());
     }
 
