@@ -1,6 +1,7 @@
 package org.pp2;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Objects;
@@ -8,9 +9,11 @@ import java.util.Set;
 
 public class DriverClimatizadorFactoryDiscoverer {
 
-    public Set<DriverClimatizadorFactory> discover(String path) {
+    public Set<DriverClimatizadorFactory> discover(String path) throws FileNotFoundException {
         // FIXME: Tenemos que emprolijar este código. Sobre todo el manejo de excepciones
         Set<DriverClimatizadorFactory> result = new HashSet<>();
+        File directory = new File(path);
+        if (!directory.exists()) throw new FileNotFoundException();
         for (File f : Objects.requireNonNull(new File(path).listFiles())) {
             if (!f.getName().endsWith(".class")) continue;
             Class<?> cls;

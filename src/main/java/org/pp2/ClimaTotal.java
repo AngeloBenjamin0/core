@@ -2,6 +2,7 @@ package org.pp2;
 
 import org.pp2.comando.Interprete;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ClimaTotal {
 
-    public static List<Dispositivo> inicializarDispositivos(String dispositivosJsonPath, String driverClimatizadorFactoriesPath){
+    public static List<Dispositivo> inicializarDispositivos(String dispositivosJsonPath, String driverClimatizadorFactoriesPath) throws FileNotFoundException {
         List<Dispositivo> dispositivos = new DispositivoMapper(dispositivosJsonPath).getDispositivos();
 
         Set<DriverClimatizadorFactory> driverClimatizadorFactories = new DriverClimatizadorFactoryDiscoverer().discover(driverClimatizadorFactoriesPath);
