@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 US Extensiblidad: Quiero agregar un climatizador
  */
 public class UserStory2Test {
-
+    final int EMPTY_SIZE = 0;
     @Test
     void testDriverClimatizadorInexistente(){
-        final int EMPTY_SIZE = 0;
+
         final String PATH_WITHOUT_CLASS = System.getProperty("user.dir") + "\\src\\main\\resources";
         Set<DriverClimatizadorFactory> climatizadorFactorySet = new DriverClimatizadorFactoryDiscoverer().discover(PATH_WITHOUT_CLASS);
         assertEquals(EMPTY_SIZE, climatizadorFactorySet.size());
@@ -24,6 +24,9 @@ public class UserStory2Test {
 
     @Test
     void testDriverClimatizadorInvalido(){
+        final String PATH_WITHOUT_CLIMATIZADOR = System.getProperty("user.dir") + "\\src\\test\\java\\climatizador_invalido_lib";
+        Set<DriverClimatizadorFactory> climatizadorFactorySet = new DriverClimatizadorFactoryDiscoverer().discover(PATH_WITHOUT_CLIMATIZADOR);
+        assertEquals(EMPTY_SIZE, climatizadorFactorySet.size());
     }
 
     @Test
