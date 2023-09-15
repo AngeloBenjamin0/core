@@ -237,5 +237,7 @@ gradle-app.setting
 
 ## Allow all from libs/
 !libs/*
+!src/test/resources/*
+!src/test/resources/*/*
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,gradle,java,eclipse
