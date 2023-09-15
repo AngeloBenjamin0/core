@@ -14,6 +14,7 @@ java {
 }
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
     flatDir {
         dirs 'libs'
     }
@@ -24,6 +25,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.28'
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
+    implementation 'com.github.pp2-addisi-correa-farina:extension-1:13c1c3b784'
 
     testImplementation 'org.mockito:mockito-junit-jupiter:5.3.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
