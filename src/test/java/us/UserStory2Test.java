@@ -10,26 +10,23 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/*
-US Extensiblidad: Quiero agregar un climatizador
- */
 public class UserStory2Test {
-    final static String PATH_INEXISTENTE = FileSystems.getDefault().getPath("src", "test", "resources", "resources_").toString();
-    final static String PATH_SIN_DISCOVERER_FACTORIES = FileSystems.getDefault().getPath("src", "test", "resources", "vacio").toString();
-    final static String PATH_CLASES_NO_DRIVER_CLIMATIZADOR_FACTORY = FileSystems.getDefault().getPath("src", "test", "resources", "clasesDistintasADriverClimatizadorFactory").toString();
     @Test
     void testPathInexistente(){
-        assertThrows(FileNotFoundException.class, () -> new DriverClimatizadorFactoryDiscoverer().discover(PATH_INEXISTENTE));
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "resources_").toString();
+        assertThrows(FileNotFoundException.class, () -> new DriverClimatizadorFactoryDiscoverer().discover(path));
     }
 
     @Test
     void testClaseCargadaNoEsDriverClimatizadorFactory(){
-        assertThrows(RuntimeException.class, () -> new DriverClimatizadorFactoryDiscoverer().discover(PATH_CLASES_NO_DRIVER_CLIMATIZADOR_FACTORY));
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "clasesDistintasADriverClimatizadorFactory").toString();
+        assertThrows(RuntimeException.class, () -> new DriverClimatizadorFactoryDiscoverer().discover(path));
     }
 
     @Test
     void testDirectorioVacio() throws FileNotFoundException {
-        Set<DriverClimatizadorFactory> climatizadorFactorySet = new DriverClimatizadorFactoryDiscoverer().discover(PATH_SIN_DISCOVERER_FACTORIES);
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "vacio").toString();
+        Set<DriverClimatizadorFactory> climatizadorFactorySet = new DriverClimatizadorFactoryDiscoverer().discover(path);
         assertTrue(climatizadorFactorySet.isEmpty());
     }
 
