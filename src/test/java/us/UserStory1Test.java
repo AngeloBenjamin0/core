@@ -18,18 +18,18 @@ public class UserStory1Test {
 	@BeforeEach
 	void setUp() throws FileNotFoundException {
 		String dispositivoJsonPath = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivos.json").toString();
-		String driverClimatizadorFactoriesPath = FileSystems.getDefault().getPath("src", "test", "resources").toString();
+		String driverClimatizadorFactoriesPath = FileSystems.getDefault().getPath("src", "test", "resources", "unDriverClimatizadorFactory").toString();
 		List<Dispositivo> dispositivos = ClimaTotal.inicializarDispositivos(dispositivoJsonPath, driverClimatizadorFactoriesPath);
 		dispositivo = dispositivos.get(0);
 	}
     
     @Test
-    void encenderClimatizador() {
+    void ca1EncenderClimatizador() {
     	dispositivo.ejecutar("ENCENDER");
     }
     
     @Test
-    void enviarComandoNoSoportado() {
+    void ca2EnviarComandoNoSoportado() {
     	IllegalArgumentException excepcion = assertThrows(IllegalArgumentException.class, () ->
     		dispositivo.ejecutar("ESTABLECER TEMPERATURA")
     	);
@@ -38,7 +38,7 @@ public class UserStory1Test {
     }
     
     @Test
-    void comandoNoSoportadoPorClimatizador() {
+    void ca3ComandoNoSoportadoPorClimatizador() {
 		RuntimeException excepcion = assertThrows(RuntimeException.class, () ->
     		dispositivo.ejecutar("ENFRIAR")
     	);
