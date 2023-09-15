@@ -1,5 +1,3 @@
-package driverClimatizador;
-
 import org.pp2.Dispositivo;
 import org.pp2.DriverClimatizador;
 

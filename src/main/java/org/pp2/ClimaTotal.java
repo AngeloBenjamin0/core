@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 
 public class ClimaTotal {
 
-    public static List<Dispositivo> inicializarDispositivos(String dispositivosJsonPath){
+    public static List<Dispositivo> inicializarDispositivos(String dispositivosJsonPath, String driverClimatizadorFactoriesPath){
         List<Dispositivo> dispositivos = new DispositivoMapper(dispositivosJsonPath).getDispositivos();
 
-        Set<DriverClimatizadorFactory> driverClimatizadorFactories = new DriverClimatizadorFactoryDiscoverer().discover("libs/");
+        Set<DriverClimatizadorFactory> driverClimatizadorFactories = new DriverClimatizadorFactoryDiscoverer().discover(driverClimatizadorFactoriesPath);
 
         // FIXME: Esto no tiene que estar hardcodeado. Vemos factible el uso de Reflection.
         Map<String, BiConsumer<DriverClimatizador, Dispositivo>> nombreComandoEjecutorMap = new HashMap<>();
