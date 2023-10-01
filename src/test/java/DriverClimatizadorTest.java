@@ -1,16 +1,13 @@
-import org.pp2.Dispositivo;
-import org.pp2.DriverClimatizador;
+import org.pp2.ComandoDispositivo;
 
-public class DriverClimatizadorTest implements DriverClimatizador {
-
+public class DriverClimatizadorTest implements ComandoDispositivo {
 	@Override
-	public void enfriar(Dispositivo dispositivo) {
-		throw new RuntimeException("Operación no aceptada por Samsung-V6");
-	}
-
-	@Override
-	public void encender(Dispositivo dispositivo) {
+	public void ejecutar() {
 		System.out.println("Encendiendo Samsung-V6");
 	}
 
+	@Override
+	public String getNombreComando() {
+		return "ENCENDER";
+	}
 }

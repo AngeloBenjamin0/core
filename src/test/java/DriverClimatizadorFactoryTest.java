@@ -1,15 +1,15 @@
+import org.pp2.ComandoDispositivo;
+import org.pp2.ComandoDispositivoFactory;
 import org.pp2.Dispositivo;
-import org.pp2.DriverClimatizador;
-import org.pp2.DriverClimatizadorFactory;
 
-public class DriverClimatizadorFactoryTest implements DriverClimatizadorFactory {
+public class DriverClimatizadorFactoryTest implements ComandoDispositivoFactory {
     @Override
     public boolean isCompatible(Dispositivo dispositivo) {
         return dispositivo.getModelo().equals("Samsung AC123");
     }
 
     @Override
-    public DriverClimatizador create() {
+    public ComandoDispositivo create() {
         return new DriverClimatizadorTest();
     }
 }

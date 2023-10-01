@@ -1,15 +1,15 @@
+import org.pp2.ComandoDispositivo;
+import org.pp2.ComandoDispositivoFactory;
 import org.pp2.Dispositivo;
-import org.pp2.DriverClimatizador;
-import org.pp2.DriverClimatizadorFactory;
 
-public class OtroDriverClimatizadorFactoryTest implements DriverClimatizadorFactory {
+public class OtroDriverClimatizadorFactoryTest implements ComandoDispositivoFactory {
     @Override
     public boolean isCompatible(Dispositivo dispositivo) {
         return false;
     }
 
     @Override
-    public DriverClimatizador create() {
+    public ComandoDispositivo create() {
         return null;
     }
 }

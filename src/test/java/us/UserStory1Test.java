@@ -36,14 +36,5 @@ public class UserStory1Test {
     	assertEquals(IllegalArgumentException.class, excepcion.getClass());
     	assertEquals("Comando no soportado", excepcion.getMessage());
     }
-    
-    @Test
-    void ca3ComandoNoSoportadoPorClimatizador() {
-		RuntimeException excepcion = assertThrows(RuntimeException.class, () ->
-    		dispositivo.ejecutar("ENFRIAR")
-    	);
-    	assertEquals(RuntimeException.class, excepcion.getClass());
-    	assertEquals("Operación no aceptada por Samsung-V6", excepcion.getMessage());
-    }
 
 }

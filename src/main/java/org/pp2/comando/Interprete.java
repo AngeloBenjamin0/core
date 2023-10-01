@@ -1,25 +1,21 @@
 package org.pp2.comando;
 
-import org.pp2.Dispositivo;
-import org.pp2.DriverClimatizador;
+import org.pp2.ComandoDispositivo;
 
 import java.util.Map;
-import java.util.function.BiConsumer;
 
 public class Interprete {
-    private final Map<String, BiConsumer<DriverClimatizador, Dispositivo>> nombreComandoEjecutorMap;
-    private final DriverClimatizador driverClimatizador;
+    private final Map<String, ComandoDispositivo> nombreComandoDispositivoMap;
 
-    public Interprete(DriverClimatizador driverClimatizador,Map<String, BiConsumer<DriverClimatizador, Dispositivo>> nombreComandoEjecutorMap) {
-        this.driverClimatizador = driverClimatizador;
-        this.nombreComandoEjecutorMap = nombreComandoEjecutorMap;
+    public Interprete(Map<String,ComandoDispositivo> nombreComandoDispositivoMap) {
+        this.nombreComandoDispositivoMap = nombreComandoDispositivoMap;
     }
 
-    public void ejecutar(Dispositivo dispositivo, String comando) {
-        BiConsumer<DriverClimatizador, Dispositivo> ejecutorComando = nombreComandoEjecutorMap.get(comando);
-        if (ejecutorComando == null)
+    public void interpretar(String comando) {
+        ComandoDispositivo comandoDispositivo = nombreComandoDispositivoMap.get(comando);
+        if (comandoDispositivo == null)
             throw new IllegalArgumentException("Comando no soportado");
 
-        ejecutorComando.accept(driverClimatizador, dispositivo);
+        comandoDispositivo.ejecutar();
     }
 }

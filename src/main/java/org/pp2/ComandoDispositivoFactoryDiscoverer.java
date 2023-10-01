@@ -7,11 +7,11 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class DriverClimatizadorFactoryDiscoverer {
+public class ComandoDispositivoFactoryDiscoverer {
 
-    public Set<DriverClimatizadorFactory> discover(String path) throws FileNotFoundException {
+    public Set<ComandoDispositivoFactory> discover(String path) throws FileNotFoundException {
         // FIXME: Tenemos que emprolijar este código. Sobre todo el manejo de excepciones
-        Set<DriverClimatizadorFactory> result = new HashSet<>();
+        Set<ComandoDispositivoFactory> result = new HashSet<>();
         File directory = new File(path);
         if (!directory.exists()) throw new FileNotFoundException();
         for (File f : Objects.requireNonNull(new File(path).listFiles())) {
@@ -22,10 +22,10 @@ public class DriverClimatizadorFactoryDiscoverer {
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
-            if (!DriverClimatizadorFactory.class.isAssignableFrom(cls))
+            if (!ComandoDispositivoFactory.class.isAssignableFrom(cls))
                 throw new RuntimeException(); // TODO: Elegir una mejor excepción
             try {
-                result.add((DriverClimatizadorFactory) cls.getDeclaredConstructor().newInstance());
+                result.add((ComandoDispositivoFactory) cls.getDeclaredConstructor().newInstance());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                      NoSuchMethodException e) {
                 throw new RuntimeException(e);

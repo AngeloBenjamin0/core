@@ -16,6 +16,5 @@ public class Main {
 
         if (dispositivo.isEmpty()) throw new RuntimeException(String.format("No se encuentra el dispositivo %s", dispositivoId));
         dispositivo.get().ejecutar(comando);
-
     }
 }

@@ -15,6 +15,6 @@ public class Dispositivo {
     private Interprete interprete;
 
     public void ejecutar(String comando){
-        interprete.ejecutar(this, comando);
+        interprete.interpretar(comando);
     }
 }
