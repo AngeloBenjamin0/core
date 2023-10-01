@@ -1,4 +1,4 @@
-import org.pp2.ComandoDispositivo;
+import org.interfaces.ComandoDispositivo;
 
 public class DriverClimatizadorTest implements ComandoDispositivo {
 	@Override

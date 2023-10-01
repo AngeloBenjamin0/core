@@ -1,5 +1,7 @@
 package org.pp2;
 
+import org.interfaces.ComandoDispositivoFactory;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;

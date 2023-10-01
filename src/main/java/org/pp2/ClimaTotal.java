@@ -1,5 +1,7 @@
 package org.pp2;
 
+import org.interfaces.ComandoDispositivo;
+import org.interfaces.ComandoDispositivoFactory;
 import org.pp2.comando.Interprete;
 
 import java.io.FileNotFoundException;
@@ -13,21 +15,21 @@ import static java.util.stream.Collectors.toMap;
 
 public class ClimaTotal {
 
-    public static List<Dispositivo> inicializarDispositivos(String dispositivosJsonPath, String comandoDispositivoFactoriesPath) throws FileNotFoundException {
-        List<Dispositivo> dispositivos = new DispositivoFactory(dispositivosJsonPath).getDispositivos();
+    public static List<DispositivoConcreto> inicializarDispositivos(String dispositivosJsonPath, String comandoDispositivoFactoriesPath) throws FileNotFoundException {
+        List<DispositivoConcreto> dispositivoConcretos = new DispositivoFactory(dispositivosJsonPath).getDispositivos();
 
         Set<ComandoDispositivoFactory> comandoDispositivoFactories = new ComandoDispositivoFactoryDiscoverer().discover(comandoDispositivoFactoriesPath);
 
-        for (Dispositivo dispositivo : dispositivos) {
-            List<ComandoDispositivoFactory> comandosAceptados = comandoDispositivoFactories.stream().filter(driver -> driver.isCompatible(dispositivo)).collect(Collectors.toList());
+        for (DispositivoConcreto dispositivoConcreto : dispositivoConcretos) {
+            List<ComandoDispositivoFactory> comandosAceptados = comandoDispositivoFactories.stream().filter(driver -> driver.isCompatible(dispositivoConcreto)).collect(Collectors.toList());
             Map<String, ComandoDispositivo> nombreComandoDispositivoMap = comandosAceptados
                     .stream()
                     .map(ComandoDispositivoFactory::create)
                     .collect(toMap(ComandoDispositivo::getNombreComando, Function.identity()));
-            dispositivo.setInterprete(new Interprete(nombreComandoDispositivoMap));
+            dispositivoConcreto.setInterprete(new Interprete(nombreComandoDispositivoMap));
         }
 
-        return dispositivos;
+        return dispositivoConcretos;
     }
 
 }

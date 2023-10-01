@@ -1,7 +1,7 @@
 package us;
 
+import org.interfaces.ComandoDispositivoFactory;
 import org.junit.jupiter.api.Test;
-import org.pp2.ComandoDispositivoFactory;
 import org.pp2.ComandoDispositivoFactoryDiscoverer;
 
 import java.io.FileNotFoundException;

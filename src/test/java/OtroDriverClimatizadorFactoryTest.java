@@ -1,6 +1,6 @@
-import org.pp2.ComandoDispositivo;
-import org.pp2.ComandoDispositivoFactory;
-import org.pp2.Dispositivo;
+import org.interfaces.ComandoDispositivo;
+import org.interfaces.ComandoDispositivoFactory;
+import org.interfaces.Dispositivo;
 
 public class OtroDriverClimatizadorFactoryTest implements ComandoDispositivoFactory {
     @Override

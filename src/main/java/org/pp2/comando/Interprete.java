@@ -1,6 +1,6 @@
 package org.pp2.comando;
 
-import org.pp2.ComandoDispositivo;
+import org.interfaces.ComandoDispositivo;
 
 import java.util.Map;
 

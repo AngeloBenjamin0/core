@@ -10,9 +10,9 @@ public class Main {
         String driverClimatizadorFactoriesPath = args[1];
         String dispositivoId = args[2];
         String comando = args[3];
-        List<Dispositivo> dispositivos = ClimaTotal.inicializarDispositivos(dispositivoJsonPath, driverClimatizadorFactoriesPath);
+        List<DispositivoConcreto> dispositivoConcretos = ClimaTotal.inicializarDispositivos(dispositivoJsonPath, driverClimatizadorFactoriesPath);
 
-        Optional<Dispositivo> dispositivo = dispositivos.stream().filter(d -> d.getId().equals(dispositivoId)).findAny();
+        Optional<DispositivoConcreto> dispositivo = dispositivoConcretos.stream().filter(d -> d.getId().equals(dispositivoId)).findAny();
 
         if (dispositivo.isEmpty()) throw new RuntimeException(String.format("No se encuentra el dispositivo %s", dispositivoId));
         dispositivo.get().ejecutar(comando);

@@ -1,19 +1,23 @@
 package org.pp2;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import org.interfaces.Dispositivo;
 import org.pp2.comando.Interprete;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Dispositivo {
+@Getter
+@Setter
+public class DispositivoConcreto extends Dispositivo {
     private String id;
     private String nombre;
     private String modelo;
     private Interprete interprete;
 
+    public DispositivoConcreto(){
+        super();
+    }
+
+    @Override
     public void ejecutar(String comando){
         interprete.interpretar(comando);
     }
