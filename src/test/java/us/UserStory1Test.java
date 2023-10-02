@@ -18,7 +18,7 @@ public class UserStory1Test {
 	@BeforeEach
 	void setUp() throws FileNotFoundException {
 		String dispositivoJsonPath = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivos.json").toString();
-		String driverClimatizadorFactoriesPath = FileSystems.getDefault().getPath("src", "test", "resources", "unDriverClimatizadorFactory").toString();
+		String driverClimatizadorFactoriesPath = FileSystems.getDefault().getPath("src", "test", "resources", "comandoDispositivoFactory").toString();
 		List<DispositivoConcreto> dispositivoConcretos = ClimaTotal.inicializarDispositivos(dispositivoJsonPath, driverClimatizadorFactoriesPath);
 		dispositivoConcreto = dispositivoConcretos.get(0);
 	}

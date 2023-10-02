@@ -2,7 +2,7 @@ import org.interfaces.ComandoDispositivo;
 import org.interfaces.ComandoDispositivoFactory;
 import org.interfaces.Dispositivo;
 
-public class OtroDriverClimatizadorFactoryTest implements ComandoDispositivoFactory {
+public class OtroComandoDispositivoFactoryTest implements ComandoDispositivoFactory {
     @Override
     public boolean isCompatible(Dispositivo dispositivo) {
         return false;
