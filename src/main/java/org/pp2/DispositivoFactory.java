@@ -14,7 +14,7 @@ public class DispositivoFactory {
         this.dispositivoJsonFile = new File(dispositivoJsonFilePath);
     }
 
-    public List<DispositivoConcreto> getDispositivos(){
+    public List<Dispositivo> getDispositivos(){
         try {
             return new ObjectMapper().readValue(dispositivoJsonFile, new TypeReference<>() {});
         } catch (IOException e) {

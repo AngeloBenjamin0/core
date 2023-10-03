@@ -15,21 +15,21 @@ import static java.util.stream.Collectors.toMap;
 
 public class ClimaTotal {
 
-    public static List<DispositivoConcreto> inicializarDispositivos(String dispositivosJsonPath, String comandoDispositivoFactoriesPath) throws FileNotFoundException {
-        List<DispositivoConcreto> dispositivoConcretos = new DispositivoFactory(dispositivosJsonPath).getDispositivos();
+    public static List<Dispositivo> inicializarDispositivos(String dispositivosJsonPath, String comandoDispositivoFactoriesPath) throws FileNotFoundException {
+        List<Dispositivo> dispositivos = new DispositivoFactory(dispositivosJsonPath).getDispositivos();
 
         Set<ComandoDispositivoFactory> comandoDispositivoFactories = new ComandoDispositivoFactoryDiscoverer().discover(comandoDispositivoFactoriesPath);
 
-        for (DispositivoConcreto dispositivoConcreto : dispositivoConcretos) {
-            List<ComandoDispositivoFactory> comandosAceptados = comandoDispositivoFactories.stream().filter(driver -> driver.isCompatible(dispositivoConcreto)).collect(Collectors.toList());
+        for (Dispositivo dispositivo : dispositivos) {
+            List<ComandoDispositivoFactory> comandosAceptados = comandoDispositivoFactories.stream().filter(driver -> driver.isCompatible(dispositivo)).collect(Collectors.toList());
             Map<String, ComandoDispositivo> nombreComandoDispositivoMap = comandosAceptados
                     .stream()
                     .map(ComandoDispositivoFactory::create)
                     .collect(toMap(ComandoDispositivo::getNombreComando, Function.identity()));
-            dispositivoConcreto.setInterprete(new Interprete(nombreComandoDispositivoMap));
+            dispositivo.setInterprete(new Interprete(nombreComandoDispositivoMap));
         }
 
-        return dispositivoConcretos;
+        return dispositivos;
     }
 
 }
