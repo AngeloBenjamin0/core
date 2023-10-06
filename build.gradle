@@ -23,7 +23,6 @@ dependencies {
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
     implementation 'com.github.pp2-addisi-correa-farina:extension-1:5ef345270c'
-    implementation 'com.github.pp2-addisi-correa-farina:separated-interface:4279bfe420'
 
     testImplementation 'org.mockito:mockito-junit-jupiter:5.3.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'

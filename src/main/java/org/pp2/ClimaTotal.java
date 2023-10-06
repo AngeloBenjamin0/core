@@ -1,32 +1,51 @@
 package org.pp2;
 
-import org.interfaces.ComandoDispositivo;
-import org.interfaces.ComandoDispositivoFactory;
-import org.pp2.comando.Interprete;
-
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toMap;
 
 public class ClimaTotal {
 
-    public static List<Dispositivo> inicializarDispositivos(String dispositivosJsonPath, String comandoDispositivoFactoriesPath) throws FileNotFoundException {
-        List<Dispositivo> dispositivos = new DispositivoFactory(dispositivosJsonPath).getDispositivos();
+    public static List<DispositivoAdapter> inicializarDispositivos(String dispositivosJsonPath, String driversPath) throws FileNotFoundException {
+        List<DispositivoAdapter> dispositivos = new DispositivoFactory(dispositivosJsonPath).getDispositivos();
+        Set<DriverFactory> driverFactories = new DriverFactoryDiscoverer().discover(driversPath);
 
-        Set<ComandoDispositivoFactory> comandoDispositivoFactories = new ComandoDispositivoFactoryDiscoverer().discover(comandoDispositivoFactoriesPath);
 
-        for (Dispositivo dispositivo : dispositivos) {
-            List<ComandoDispositivoFactory> comandosAceptados = comandoDispositivoFactories.stream().filter(driver -> driver.isCompatible(dispositivo)).collect(Collectors.toList());
-            Map<String, ComandoDispositivo> nombreComandoDispositivoMap = comandosAceptados
-                    .stream()
-                    .map(ComandoDispositivoFactory::create)
-                    .collect(toMap(ComandoDispositivo::getNombreComando, Function.identity()));
-            dispositivo.setInterprete(new Interprete(nombreComandoDispositivoMap));
+        Map<DispositivoAdapter, Object> dispositivoObjectMap = new HashMap<>();
+
+        for (DispositivoAdapter dispositivoAdapter : dispositivos){
+            List<Object> driversCompatibles = driverFactories.stream()
+                    .filter(driverFactory -> driverFactory.isCompatible(dispositivoAdapter))
+                    .map(driverFactory -> driverFactory.create(dispositivoAdapter))
+                    .collect(Collectors.toList());
+            if (!driversCompatibles.isEmpty())
+                // Nos quedamos arbitrariamente con un Driver.
+                dispositivoObjectMap.put(dispositivoAdapter, driversCompatibles.get(0));
+        }
+
+        for (Map.Entry<DispositivoAdapter, Object> entry : dispositivoObjectMap.entrySet()){
+            Map<String, Runnable> comandos = new HashMap<>();
+            DispositivoAdapter dispositivo = entry.getKey();
+            Object driver = entry.getValue();
+
+            List<Method> methods = List.of(driverFactories.getClass().getDeclaredMethods());
+            // TODO: Agregar las siguientes validaciones: Todos los métodos tienen 0 parámetros.
+            for (Method method : methods) {
+                String nombreComando = method.getName().toUpperCase();
+                comandos.put(nombreComando, () -> {
+                    try {
+                        method.invoke(driver);
+                    } catch (IllegalAccessException | InvocationTargetException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+            dispositivo.setComandos(comandos);
         }
 
         return dispositivos;

@@ -1,22 +1,17 @@
 package org.pp2;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
-public class Dispositivo {
+@Data
+@NoArgsConstructor // Necesario para poder serializar/deserializar.
+@AllArgsConstructor
+public abstract class Dispositivo {
+
     private String id;
     private String modelo;
-    private ClimatizadorGateway climatizadorGateway;
+    private String nombre;
 
-    public void ejecutar(String comando){
-
-        switch (comando){
-            case "APAGAR": climatizadorGateway.apagar();
-            case "ENCENDER": climatizadorGateway.encender();
-            default:
-                throw new IllegalArgumentException("Comando no soportado");
-        }
-    }
+    public abstract void ejecutar(String comando);
 }

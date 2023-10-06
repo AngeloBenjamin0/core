@@ -1,7 +1,5 @@
 package org.pp2;
 
-import org.interfaces.ComandoDispositivoFactory;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
@@ -9,11 +7,11 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class ComandoDispositivoFactoryDiscoverer {
+public class DriverFactoryDiscoverer {
 
-    public Set<ComandoDispositivoFactory> discover(String path) throws FileNotFoundException {
+    public Set<DriverFactory> discover(String path) throws FileNotFoundException {
         // FIXME: Tenemos que emprolijar este código. Sobre todo el manejo de excepciones
-        Set<ComandoDispositivoFactory> result = new HashSet<>();
+        Set<DriverFactory> result = new HashSet<>();
         File directory = new File(path);
         if (!directory.exists()) throw new FileNotFoundException();
         for (File f : Objects.requireNonNull(new File(path).listFiles())) {
@@ -24,10 +22,10 @@ public class ComandoDispositivoFactoryDiscoverer {
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
-            if (!ComandoDispositivoFactory.class.isAssignableFrom(cls))
+            if (!DriverFactory.class.isAssignableFrom(cls))
                 throw new RuntimeException(); // TODO: Elegir una mejor excepción
             try {
-                result.add((ComandoDispositivoFactory) cls.getDeclaredConstructor().newInstance());
+                result.add((DriverFactory) cls.getDeclaredConstructor().newInstance());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                      NoSuchMethodException e) {
                 throw new RuntimeException(e);
