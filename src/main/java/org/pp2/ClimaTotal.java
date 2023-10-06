@@ -15,7 +15,6 @@ public class ClimaTotal {
         List<DispositivoAdapter> dispositivos = new DispositivoFactory(dispositivosJsonPath).getDispositivos();
         Set<DriverFactory> driverFactories = new DriverFactoryDiscoverer().discover(driversPath);
 
-
         Map<DispositivoAdapter, Object> dispositivoObjectMap = new HashMap<>();
 
         for (DispositivoAdapter dispositivoAdapter : dispositivos){
@@ -33,8 +32,8 @@ public class ClimaTotal {
             DispositivoAdapter dispositivo = entry.getKey();
             Object driver = entry.getValue();
 
-            List<Method> methods = List.of(driverFactories.getClass().getDeclaredMethods());
-            // TODO: Agregar las siguientes validaciones: Todos los métodos tienen 0 parámetros.
+            List<Method> methods = List.of(driver.getClass().getDeclaredMethods());
+            // TODO: Agregar las siguientes validaciones: Todos los métodos tienen 0 parámetros. Solo obtener los metodos publicos
             for (Method method : methods) {
                 String nombreComando = method.getName().toUpperCase();
                 comandos.put(nombreComando, () -> {

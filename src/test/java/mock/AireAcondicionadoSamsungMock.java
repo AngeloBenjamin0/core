@@ -1,12 +1,12 @@
-package org.pp2.mock;
+package mock;
 
-public class AireAcondicionadoSamsung {
+public class AireAcondicionadoSamsungMock {
 
     private boolean encendido;
     private int temperatura;
     private int velocidadVentilador;
 
-    public AireAcondicionadoSamsung() {
+    public AireAcondicionadoSamsungMock() {
         // Inicializar el dispositivo de climatización
         encendido = false;
         temperatura = 25; // Temperatura inicial

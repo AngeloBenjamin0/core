@@ -19,7 +19,7 @@ public class UserStory2Test {
 
     @Test
     void ca2ClaseCargadaNoEsDriverClimatizadorFactory(){
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "distintoAComandoDispositivoFactory").toString();
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "distintoADriverFactory").toString();
         assertThrows(RuntimeException.class, () -> new DriverFactoryDiscoverer().discover(path));
     }
 
@@ -32,12 +32,12 @@ public class UserStory2Test {
 
     @Test
     void ca4UnicoDriverClimatizadorFactory() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "comandoDispositivoFactory").toString();
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "driverFactory").toString();
         assertEquals(1, new DriverFactoryDiscoverer().discover(path).size());
     }
     @Test
     void ca5MasDeUnDriverClimatizadorFactory() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "multiplesComandoDispositivoFactories").toString();
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "multiplesDriverFactories").toString();
         assertTrue(new DriverFactoryDiscoverer().discover(path).size() > 1);
     }
 }
