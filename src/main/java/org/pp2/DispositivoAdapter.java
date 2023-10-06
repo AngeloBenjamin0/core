@@ -7,7 +7,7 @@ import java.util.Map;
 
 @Getter
 @Setter
-public class DispositivoAdapter extends Dispositivo{
+public class DispositivoAdapter extends Dispositivo {
     private String id;
     private String modelo;
     private Map<String, Runnable> comandos;

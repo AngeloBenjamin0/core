@@ -3,7 +3,7 @@ package us;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.pp2.ClimaTotal;
-import org.pp2.DispositivoAdapter;
+import org.pp2.Dispositivo;
 
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystems;
@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UserStory1Test {
-	private DispositivoAdapter dispositivo;
+	private Dispositivo dispositivo;
 	
 	@BeforeEach
 	void setUp() throws FileNotFoundException {
 		String dispositivoJsonPath = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivos.json").toString();
 		String driverClimatizadorFactoriesPath = FileSystems.getDefault().getPath("src", "test", "resources", "driverFactory").toString();
-		List<DispositivoAdapter> dispositivos = ClimaTotal.inicializarDispositivos(dispositivoJsonPath, driverClimatizadorFactoriesPath);
+		List<Dispositivo> dispositivos = ClimaTotal.inicializarDispositivos(dispositivoJsonPath, driverClimatizadorFactoriesPath);
 		dispositivo = dispositivos.get(0);
 	}
     
