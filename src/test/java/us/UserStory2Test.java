@@ -1,12 +1,12 @@
 package us;
 
 import org.junit.jupiter.api.Test;
-import org.pp2.DriverFactory;
-import org.pp2.DriverFactoryDiscoverer;
+import org.pp2.Dispositivo;
+import org.pp2.DispositivoDiscoverer;
 
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystems;
-import java.util.Set;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,30 +14,30 @@ public class UserStory2Test {
     @Test
     void ca1PathInexistente(){
         String path = FileSystems.getDefault().getPath("src", "test", "resources", "directorioInexistente").toString();
-        assertThrows(FileNotFoundException.class, () -> new DriverFactoryDiscoverer().discover(path));
+        assertThrows(FileNotFoundException.class, () -> new DispositivoDiscoverer().discover(path));
     }
 
     @Test
     void ca2ClaseCargadaNoEsDriverClimatizadorFactory(){
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "distintoADriverFactory").toString();
-        assertThrows(RuntimeException.class, () -> new DriverFactoryDiscoverer().discover(path));
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "distintoADispositivoAdapters").toString();
+        assertThrows(RuntimeException.class, () -> new DispositivoDiscoverer().discover(path));
     }
 
     @Test
     void ca3DirectorioVacio() throws FileNotFoundException {
         String path = FileSystems.getDefault().getPath("src", "test", "resources", "directorioVacio").toString();
-        Set<DriverFactory> climatizadorFactorySet = new DriverFactoryDiscoverer().discover(path);
-        assertTrue(climatizadorFactorySet.isEmpty());
+        List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path);
+        assertTrue(dispositivos.isEmpty());
     }
 
     @Test
     void ca4UnicoDriverClimatizadorFactory() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "driverFactory").toString();
-        assertEquals(1, new DriverFactoryDiscoverer().discover(path).size());
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivoAdapters").toString();
+        assertEquals(1, new DispositivoDiscoverer().discover(path).size());
     }
     @Test
-    void ca5MasDeUnDriverClimatizadorFactory() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "multiplesDriverFactories").toString();
-        assertTrue(new DriverFactoryDiscoverer().discover(path).size() > 1);
+    void ca5MasDeUnDispositivo() throws FileNotFoundException {
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "multipleDispositivoAdapters").toString();
+        assertTrue(new DispositivoDiscoverer().discover(path).size() > 1);
     }
 }

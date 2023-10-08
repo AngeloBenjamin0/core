@@ -3,15 +3,15 @@ package org.pp2;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-public class DriverFactoryDiscoverer {
+public class DispositivoDiscoverer {
 
-    public Set<DriverFactory> discover(String path) throws FileNotFoundException {
+    public List<Dispositivo> discover(String path) throws FileNotFoundException {
         // FIXME: Tenemos que emprolijar este código. Sobre todo el manejo de excepciones
-        Set<DriverFactory> result = new HashSet<>();
+        List<Dispositivo> drivers = new ArrayList<>();
         File directory = new File(path);
         if (!directory.exists()) throw new FileNotFoundException();
         for (File f : Objects.requireNonNull(new File(path).listFiles())) {
@@ -22,16 +22,16 @@ public class DriverFactoryDiscoverer {
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
-            if (!DriverFactory.class.isAssignableFrom(cls))
+            if (!Dispositivo.class.isAssignableFrom(cls))
                 throw new RuntimeException(); // TODO: Elegir una mejor excepción
             try {
-                result.add((DriverFactory) cls.getDeclaredConstructor().newInstance());
+                drivers.add((Dispositivo) cls.getDeclaredConstructor().newInstance());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                      NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
         }
-        return result;
+        return drivers;
     }
 
 }

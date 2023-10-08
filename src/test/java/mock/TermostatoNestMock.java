@@ -13,4 +13,13 @@ public class TermostatoNestMock {
     public void ajustarModo(String modo) {
         System.out.println("Se ha ajustado el modo a " + modo);
     }
+
+    public void encender(){
+        System.out.println("Encendiendo...");
+    }
+
+    public void apagar(){
+        System.out.println("Apagando...");
+    }
+
 }

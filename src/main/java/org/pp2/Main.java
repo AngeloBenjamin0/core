@@ -6,15 +6,14 @@ import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        String dispositivoJsonPath = args[0];
-        String driverClimatizadorFactoriesPath = args[1];
-        String dispositivoId = args[2];
-        String comando = args[3];
-        List<Dispositivo> dispositivos = ClimaTotal.inicializarDispositivos(dispositivoJsonPath, driverClimatizadorFactoriesPath);
+        String dispositivosPath = args[0];
+        String nombreDispositivo = args[1];
+        String comando = args[2];
+        List<Dispositivo> dispositivos = ClimaTotal.inicializarDispositivos(dispositivosPath);
 
-        Optional<Dispositivo> dispositivo = dispositivos.stream().filter(d -> d.getId().equals(dispositivoId)).findAny();
+        Optional<Dispositivo> dispositivo = dispositivos.stream().filter(d -> d.getNombre().equals(nombreDispositivo)).findAny();
 
-        if (dispositivo.isEmpty()) throw new RuntimeException(String.format("No se encuentra el dispositivo %s", dispositivoId));
+        if (dispositivo.isEmpty()) throw new RuntimeException(String.format("No se encuentra el dispositivo %s", nombreDispositivo));
         dispositivo.get().ejecutar(comando);
     }
 }
