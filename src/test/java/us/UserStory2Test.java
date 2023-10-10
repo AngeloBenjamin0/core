@@ -19,7 +19,7 @@ public class UserStory2Test {
 
     @Test
     void ca2ClaseCargadaNoEsDispositivo(){
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "distintoADispositivo").toString();
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "notDispositivo").toString();
         assertThrows(RuntimeException.class, () -> new DispositivoDiscoverer().discover(path));
     }
 
