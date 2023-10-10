@@ -18,8 +18,8 @@ public class UserStory2Test {
     }
 
     @Test
-    void ca2ClaseCargadaNoEsDriverClimatizadorFactory(){
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "distintoADispositivoAdapters").toString();
+    void ca2ClaseCargadaNoEsDispositivo(){
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "distintoADispositivo").toString();
         assertThrows(RuntimeException.class, () -> new DispositivoDiscoverer().discover(path));
     }
 
@@ -31,13 +31,13 @@ public class UserStory2Test {
     }
 
     @Test
-    void ca4UnicoDriverClimatizadorFactory() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivoAdapters").toString();
+    void ca4UnicoDispositivo() throws FileNotFoundException {
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivo").toString();
         assertEquals(1, new DispositivoDiscoverer().discover(path).size());
     }
     @Test
     void ca5MasDeUnDispositivo() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "multipleDispositivoAdapters").toString();
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "multipleDispositivos").toString();
         assertTrue(new DispositivoDiscoverer().discover(path).size() > 1);
     }
 }
