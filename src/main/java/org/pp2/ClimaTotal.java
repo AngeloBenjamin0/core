@@ -1,12 +1,17 @@
 package org.pp2;
 
+import lombok.Getter;
+
 import java.io.FileNotFoundException;
 import java.util.List;
 
+@Getter
 public class ClimaTotal {
 
-    public static List<Dispositivo> inicializarDispositivos(String driversPath) throws FileNotFoundException {
-        return new DispositivoDiscoverer().discover(driversPath);
+    private final List<Dispositivo> dispositivos;
+
+    public ClimaTotal(String dispositivosPath) throws FileNotFoundException {
+        dispositivos = new DispositivoDiscoverer().discover(dispositivosPath);
     }
 
 }
