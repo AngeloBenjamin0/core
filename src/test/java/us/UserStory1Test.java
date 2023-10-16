@@ -18,16 +18,17 @@ public class UserStory1Test {
 	@BeforeEach
 	void setUp() throws FileNotFoundException {
 		String dispositivosPath = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivo").toString();
-		ClimaTotal climaTotal = new ClimaTotal(dispositivosPath);
+		String propertiesPath = FileSystems.getDefault().getPath("src", "test", "resources", "application.properties").toString();
+		ClimaTotal climaTotal = new ClimaTotal(dispositivosPath, propertiesPath);
 		List<Dispositivo> dispositivos = climaTotal.getDispositivos();
 		dispositivo = dispositivos.get(0);
 	}
-    
+
     @Test
     void ca1EncenderClimatizador() {
     	dispositivo.ejecutar("ENCENDER");
     }
-    
+
     @Test
     void ca2EnviarComandoNoSoportado() {
     	IllegalArgumentException excepcion = assertThrows(IllegalArgumentException.class, () ->
