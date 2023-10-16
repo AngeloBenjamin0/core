@@ -22,7 +22,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.28'
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
-    implementation 'com.github.pp2-addisi-correa-farina:extension-1:5ef345270c'
+    implementation fileTree(dir: 'src/test/resources/plugins', include: '*.jar')
 
     testImplementation 'org.mockito:mockito-junit-jupiter:5.3.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
