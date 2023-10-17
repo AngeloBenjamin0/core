@@ -1,7 +1,11 @@
 import mock.TermostatoNestMock;
 import org.pp2.Dispositivo;
+import org.pp2.DispositivoObserver;
+
+import static java.time.LocalDateTime.now;
 
 public class GoogleNestAdapter implements Dispositivo {
+    DispositivoObserver dispositivoObserver;
 
     private final TermostatoNestMock termostatoNestMock;
 
@@ -21,5 +25,15 @@ public class GoogleNestAdapter implements Dispositivo {
             case "ENCENDER": termostatoNestMock.encender();
             default: throw new IllegalArgumentException("Comando no soportado");
         }
+    }
+
+    @Override
+    public void registrarObserver(DispositivoObserver observer) {
+        this.dispositivoObserver = observer;
+    }
+
+    @Override
+    public void eliminarObserver() {
+        this.dispositivoObserver = null;
     }
 }
