@@ -2,6 +2,7 @@ package us;
 
 import org.junit.jupiter.api.Test;
 import org.pp2.ClimaTotal;
+import org.pp2.ComandoDeshabilitadoException;
 import org.pp2.Dispositivo;
 
 import java.io.FileNotFoundException;
@@ -32,11 +33,11 @@ public class UserStory3Test {
         List<Dispositivo> dispositivos = climaTotal.getDispositivos();
         Dispositivo d1 = dispositivos.get(0);
 
-        RuntimeException excepcion = assertThrows(RuntimeException.class, () ->
+        ComandoDeshabilitadoException excepcion = assertThrows(ComandoDeshabilitadoException.class, () ->
                 d1.ejecutar("ENCENDER"));
 
-        assertEquals(RuntimeException.class, excepcion.getClass());
-        assertEquals(excepcion.getMessage(), "La ejecución de comandos no está habilitada");
+        assertEquals(ComandoDeshabilitadoException.class, excepcion.getClass());
+        assertEquals(excepcion.getMessage(), "Error al ejecutar el comando ENCENDER. Ejecución de comandos deshabilitada desde 9 hasta 12.");
     }
 
 }

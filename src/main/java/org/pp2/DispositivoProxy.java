@@ -29,7 +29,7 @@ public class DispositivoProxy implements Dispositivo {
     @Override
     public void ejecutar(String comando) {
         if(isDeshabilitado())
-            throw new RuntimeException("La ejecución de comandos no está habilitada");
+            throw new ComandoDeshabilitadoException(comando, horarioInicio, horarioFin);
 
         if(observer!=null)
             observer.registrarComando(this.getNombre(), comando, now());
