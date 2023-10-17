@@ -28,14 +28,18 @@ public class DispositivoProxy implements Dispositivo {
 
     @Override
     public void ejecutar(String comando) {
-        LocalTime now = localTimeService.now();
-        if (now.isAfter(horarioInicio) && now.isBefore(horarioFin))
+        if(isDeshabilitado())
             throw new RuntimeException("La ejecución de comandos no está habilitada");
 
         if(observer!=null)
             observer.registrarComando(this.getNombre(), comando, now());
 
         dispositivo.ejecutar(comando);
+    }
+
+    private boolean isDeshabilitado() {
+        LocalTime now = localTimeService.now();
+        return now.isAfter(horarioInicio) && now.isBefore(horarioFin);
     }
 
     @Override
