@@ -1,10 +1,10 @@
 package org.pp2.time;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public class TestLocalTimeService implements LocalTimeService {
     @Override
-    public LocalTime now() {
-        return LocalTime.of(10, 0, 0);
+    public LocalDateTime now() {
+        return LocalDateTime.of(2020, 1, 1, 10, 0);
     }
 }

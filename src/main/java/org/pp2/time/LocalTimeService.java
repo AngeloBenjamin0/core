@@ -1,7 +1,7 @@
 package org.pp2.time;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public interface LocalTimeService {
-    LocalTime now();
+    LocalDateTime now();
 }
