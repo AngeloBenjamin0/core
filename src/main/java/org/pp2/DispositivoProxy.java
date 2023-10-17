@@ -32,7 +32,9 @@ public class DispositivoProxy implements Dispositivo {
         if (now.isAfter(horarioInicio) && now.isBefore(horarioFin))
             throw new RuntimeException("La ejecución de comandos no está habilitada");
 
-        observer.registrarComando(this.getNombre(), comando, now());
+        if(observer!=null)
+            observer.registrarComando(this.getNombre(), comando, now());
+
         dispositivo.ejecutar(comando);
     }
 
