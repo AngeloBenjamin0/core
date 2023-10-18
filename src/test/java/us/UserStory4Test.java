@@ -6,6 +6,8 @@ import org.pp2.ClimaTotal;
 import org.pp2.Dispositivo;
 import org.pp2.registro_comandos.CreadorCSV;
 import org.pp2.registro_comandos.Historico;
+import org.pp2.time.LocalTimeService;
+import org.pp2.time.TestLocalTimeService;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class UserStory4Test {
     private Dispositivo dispositivo;
     Historico historico;
+    LocalTimeService localTimeService;
+    final String HEADER_ESPERADO = "DispositivoNombre,Comando,Timestamp";
     @BeforeEach
     void setUp() throws FileNotFoundException {
         String dispositivosPath = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivo").toString();
@@ -29,35 +33,39 @@ public class UserStory4Test {
         List<Dispositivo> dispositivos = climaTotal.getDispositivos();
         dispositivo = dispositivos.get(0);
         historico = new Historico();
+        localTimeService = new TestLocalTimeService();
     }
     @Test
     void ca1ReporteGenerado() throws IOException {
+        final String PRIMER_REGISTRO_ESPERADO = "Samsung v2,ENCENDER,2020-01-01T10:00";
+        final String FILE_PATH = FileSystems.getDefault().getPath("src", localTimeService.now().toString().replace(":","_") + ".csv").toString();
+        System.out.println(FILE_PATH);
         dispositivo.registrarObserver(historico);
         dispositivo.ejecutar("ENCENDER");
-        String filePath = "src/historico1";
-        new CreadorCSV(historico).crearCSV(filePath);
 
-        File file = new File(filePath);
+        new CreadorCSV(historico, localTimeService).crearCSV();
+
+        File file = new File(FILE_PATH);
         List<String> fileLines = Files.readAllLines(Path.of(file.getPath()));
 
         assertTrue(file.exists());
-        assertEquals(fileLines.size(), 2);
-        assertEquals(fileLines.get(0), "DispositivoNombre,Comando,Timestamp");
-        assertEquals(fileLines.get(1), "Samsung v2,ENCENDER,2020-01-01T10:00");
+        assertEquals(2, fileLines.size());
+        assertEquals(HEADER_ESPERADO, fileLines.get(0));
+        assertEquals(PRIMER_REGISTRO_ESPERADO, fileLines.get(1));
     }
 
     @Test
     void ca2ReporteVacio() throws IOException {
-        dispositivo.registrarObserver(historico);
-        String filePath = "src/historico1";
-        new CreadorCSV(historico).crearCSV(filePath);
+        final String FILE_PATH = FileSystems.getDefault().getPath("src", localTimeService.now().toString().replace(":","_") + ".csv").toString();
 
-        File file = new File(filePath);
+        dispositivo.registrarObserver(historico);
+        new CreadorCSV(historico, new TestLocalTimeService()).crearCSV();
+        File file = new File(FILE_PATH);
         List<String> fileLines = Files.readAllLines(Path.of(file.getPath()));
 
         assertTrue(file.exists());
-        assertEquals(fileLines.size(), 1);
-        assertEquals(fileLines.get(0), "DispositivoNombre,Comando,Timestamp");
+        assertEquals(1, fileLines.size());
+        assertEquals(HEADER_ESPERADO, fileLines.get(0));
     }
 
 }
