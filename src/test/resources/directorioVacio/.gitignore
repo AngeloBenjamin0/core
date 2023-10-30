@@ -1,4 +1,0 @@
-# Este directorio no debe tener ningún archivo.
-# La existencia de este directorio es simplemente por motivos de testing.
-*
-!.gitignore

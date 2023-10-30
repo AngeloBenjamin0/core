@@ -6,7 +6,10 @@ import org.pp2.DispositivoDiscoverer;
 import org.pp2.DispositivoDiscoveringException;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,10 +32,13 @@ public class UserStory2Test {
     }
 
     @Test
-    void ca3DirectorioVacio() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "directorioVacio").toString();
-        List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path);
+    void ca3DirectorioVacio() throws IOException {
+        Path path = FileSystems.getDefault().getPath("src", "test", "resources", "directorioVacio");
+        Files.createDirectories(path);
+        List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path.toString());
         assertTrue(dispositivos.isEmpty());
+
+        Files.deleteIfExists(path);
     }
 
     @Test
