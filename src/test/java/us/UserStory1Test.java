@@ -1,9 +1,9 @@
 package us;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.pp2.ClimaTotal;
-import org.pp2.Dispositivo;
 
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystems;
@@ -13,29 +13,43 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UserStory1Test {
-	private Dispositivo dispositivo;
-	
+	private ClimaTotal climaTotal;
+
 	@BeforeEach
 	void setUp() throws FileNotFoundException {
 		String dispositivosPath = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivo").toString();
 		String propertiesPath = FileSystems.getDefault().getPath("src", "test", "resources", "application.properties").toString();
-		ClimaTotal climaTotal = new ClimaTotal(dispositivosPath, propertiesPath);
-		List<Dispositivo> dispositivos = climaTotal.getDispositivos();
-		dispositivo = dispositivos.get(0);
+
+		climaTotal = new ClimaTotal(dispositivosPath, propertiesPath);
 	}
 
     @Test
-    void ca1EncenderClimatizador() {
-    	dispositivo.ejecutar("ENCENDER");
+    void ca1EncenderDispositivo() {
+		climaTotal.ejecutarComando("d1", "ENCENDER");
+		assertEquals(List.of("Se ejecuta comando ENCENDER"), RegistroResultadoEjecucion.getResultadoEjecucion());
     }
 
     @Test
-    void ca2EnviarComandoNoSoportado() {
+    void ca2ComandoInexistente() {
     	IllegalArgumentException excepcion = assertThrows(IllegalArgumentException.class, () ->
-    		dispositivo.ejecutar("ESTABLECER TEMPERATURA")
+				climaTotal.ejecutarComando("d1", "comandoInexistente")
     	);
     	assertEquals(IllegalArgumentException.class, excepcion.getClass());
-    	assertEquals("Comando no soportado", excepcion.getMessage());
+    	assertEquals("Comando inexistente", excepcion.getMessage());
     }
+
+	@Test
+	void ca3DispositivoInexistente(){
+		IllegalArgumentException excepcion = assertThrows(IllegalArgumentException.class, () ->
+				climaTotal.ejecutarComando("d2", "ENCENDER")
+		);
+		assertEquals(IllegalArgumentException.class, excepcion.getClass());
+		assertEquals("Dispositivo inexistente", excepcion.getMessage());
+	}
+
+	@AfterEach
+	void tearDown(){
+		RegistroResultadoEjecucion.clearResultadoEjecucion();
+	}
 
 }
