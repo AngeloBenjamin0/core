@@ -48,6 +48,6 @@ public class DispositivoProxy implements Dispositivo {
 
     @Override
     public void eliminarObserver() {
-
+        this.observer = null;
     }
 }

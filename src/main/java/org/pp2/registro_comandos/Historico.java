@@ -15,7 +15,6 @@ public class Historico implements DispositivoObserver {
 
     @Override
     public void registrarComando(String dispositivoNombre, String comando, LocalDateTime timestamp) {
-        // Save the executed command with timestamp to the log
         registros.add(new ComandoRegistro(dispositivoNombre, comando, timestamp));
     }
 
