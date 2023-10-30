@@ -8,6 +8,8 @@ import org.pp2.DispositivoDiscoveringException;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystems;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,11 +38,15 @@ public class UserStory2Test {
     @Test
     void ca4UnicoDispositivo() throws FileNotFoundException {
         String path = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivo").toString();
-        assertEquals(1, new DispositivoDiscoverer().discover(path).size());
+        List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path);
+        assertEquals(1, dispositivos.size());
+        assertEquals(Set.of("d1"), dispositivos.stream().map(Dispositivo::getNombre).collect(Collectors.toSet()));
     }
     @Test
     void ca5MasDeUnDispositivo() throws FileNotFoundException {
         String path = FileSystems.getDefault().getPath("src", "test", "resources", "multipleDispositivos").toString();
-        assertTrue(new DispositivoDiscoverer().discover(path).size() > 1);
+        List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path);
+        assertEquals(2, dispositivos.size());
+        assertEquals(Set.of("d1", "d2"), dispositivos.stream().map(Dispositivo::getNombre).collect(Collectors.toSet()));
     }
 }

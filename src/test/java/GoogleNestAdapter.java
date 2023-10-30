@@ -2,8 +2,6 @@ import mock.TermostatoNestMock;
 import org.pp2.Dispositivo;
 import org.pp2.DispositivoObserver;
 
-import static java.time.LocalDateTime.now;
-
 public class GoogleNestAdapter implements Dispositivo {
     DispositivoObserver dispositivoObserver;
 
@@ -15,7 +13,7 @@ public class GoogleNestAdapter implements Dispositivo {
 
     @Override
     public String getNombre() {
-        return "Google Nest";
+        return "d2";
     }
 
     @Override
