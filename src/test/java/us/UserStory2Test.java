@@ -12,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UserStory2Test {
     @Test
-    void ca1PathInexistente(){
+    void ca1DirectorioInexistente(){
         String path = FileSystems.getDefault().getPath("src", "test", "resources", "directorioInexistente").toString();
         assertThrows(FileNotFoundException.class, () -> new DispositivoDiscoverer().discover(path));
     }
 
     @Test
-    void ca2ClaseCargadaNoEsDispositivo(){
+    void ca2NoEsDispositivo(){
         String path = FileSystems.getDefault().getPath("src", "test", "resources", "notDispositivo").toString();
         assertThrows(RuntimeException.class, () -> new DispositivoDiscoverer().discover(path));
     }
