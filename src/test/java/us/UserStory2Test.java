@@ -3,6 +3,7 @@ package us;
 import org.junit.jupiter.api.Test;
 import org.pp2.Dispositivo;
 import org.pp2.DispositivoDiscoverer;
+import org.pp2.DispositivoDiscoveringException;
 
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystems;
@@ -20,7 +21,9 @@ public class UserStory2Test {
     @Test
     void ca2NoEsDispositivo(){
         String path = FileSystems.getDefault().getPath("src", "test", "resources", "notDispositivo").toString();
-        assertThrows(RuntimeException.class, () -> new DispositivoDiscoverer().discover(path));
+        DispositivoDiscoveringException excepcion = assertThrows(DispositivoDiscoveringException.class, () ->
+                new DispositivoDiscoverer().discover(path));
+        assertEquals("No se pudo cargar la extensión con nombre DistintoADispositivo.class", excepcion.getMessage());
     }
 
     @Test

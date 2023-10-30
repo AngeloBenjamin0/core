@@ -15,12 +15,13 @@ public class DispositivoDiscoverer {
         File directory = new File(path);
         if (!directory.exists()) throw new FileNotFoundException();
         for (File f : Objects.requireNonNull(new File(path).listFiles())) {
-            if (!f.getName().endsWith(".class")) continue;
+            String nombreArchivo = f.getName();
+            if (!nombreArchivo.endsWith(".class")) continue;
             Class<?> cls;
             try {
-                cls = Class.forName(f.getName().replace(".class", ""));
+                cls = Class.forName(nombreArchivo.replace(".class", ""));
             } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
+                throw new DispositivoDiscoveringException(nombreArchivo, e);
             }
             if (!Dispositivo.class.isAssignableFrom(cls))
                 throw new RuntimeException(); // TODO: Elegir una mejor excepción
