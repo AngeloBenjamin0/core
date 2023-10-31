@@ -28,7 +28,7 @@ public class UserStory2Test {
         String path = FileSystems.getDefault().getPath("src", "test", "resources", "notDispositivo").toString();
         DispositivoDiscoveringException excepcion = assertThrows(DispositivoDiscoveringException.class, () ->
                 new DispositivoDiscoverer().discover(path));
-        assertEquals("No se pudo cargar la extensión con nombre DistintoADispositivo.class", excepcion.getMessage());
+        assertEquals("La clase NotADispositivo no es de tipo Dispositivo, ni tampoco es una superclase ni una superinterfaz", excepcion.getMessage());
     }
 
     @Test
@@ -54,5 +54,13 @@ public class UserStory2Test {
         List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path);
         assertEquals(2, dispositivos.size());
         assertEquals(Set.of("d1", "d2"), dispositivos.stream().map(Dispositivo::getNombre).collect(Collectors.toSet()));
+    }
+
+    @Test
+    void ca6ClaseInexistente(){
+        String path = FileSystems.getDefault().getPath("src", "test", "resources", "claseInexistente").toString();
+        DispositivoDiscoveringException excepcion = assertThrows(DispositivoDiscoveringException.class, () ->
+                new DispositivoDiscoverer().discover(path));
+        assertEquals("Clase claseInexistente.class no encontrada", excepcion.getMessage());
     }
 }

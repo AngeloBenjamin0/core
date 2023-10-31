@@ -17,14 +17,16 @@ public class DispositivoDiscoverer {
         for (File f : Objects.requireNonNull(new File(path).listFiles())) {
             String nombreArchivo = f.getName();
             if (!nombreArchivo.endsWith(".class")) continue;
+            String nombreClase = nombreArchivo.replace(".class", "");
             Class<?> cls;
             try {
-                cls = Class.forName(nombreArchivo.replace(".class", ""));
+                cls = Class.forName(nombreClase);
             } catch (ClassNotFoundException e) {
-                throw new DispositivoDiscoveringException(nombreArchivo, e);
+                throw new DispositivoDiscoveringException(String.format("Clase %s no encontrada", nombreArchivo), e);
             }
             if (!Dispositivo.class.isAssignableFrom(cls))
-                throw new RuntimeException(); // TODO: Elegir una mejor excepción
+                throw new DispositivoDiscoveringException(String.format("La clase %s no es de tipo Dispositivo, " +
+                        "ni tampoco es una superclase ni una superinterfaz", cls.getName()));
             try {
                 drivers.add((Dispositivo) cls.getDeclaredConstructor().newInstance());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
