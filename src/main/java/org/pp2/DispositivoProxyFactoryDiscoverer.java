@@ -23,7 +23,7 @@ public class DispositivoProxyFactoryDiscoverer {
             try {
                 cls = Class.forName(nombreClase);
             } catch (ClassNotFoundException e) {
-                throw new DispositivoDiscoveringException(String.format("Clase %s no encontrada", nombreArchivo), e);
+                throw new DiscovererException(String.format("Clase %s no encontrada", nombreArchivo), e);
             }
             if (DispositivoProxyFactory.class.isAssignableFrom(cls)) {
                 try {

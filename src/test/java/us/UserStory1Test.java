@@ -18,9 +18,9 @@ public class UserStory1Test {
 	@BeforeEach
 	void setUp() throws FileNotFoundException {
 		String dispositivosPath = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivo").toString();
-		String propertiesPath = FileSystems.getDefault().getPath("src", "test", "resources", "application.properties").toString();
 
-		climaTotal = new ClimaTotal(dispositivosPath, propertiesPath);
+
+		climaTotal = new ClimaTotal(dispositivosPath, "");
 	}
 
     @Test

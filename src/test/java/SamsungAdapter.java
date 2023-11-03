@@ -1,6 +1,5 @@
 import mock.AireAcondicionadoSamsungMock;
 import org.pp2.Dispositivo;
-import org.pp2.DispositivoObserver;
 import us.RegistroResultadoEjecucion;
 
 public class SamsungAdapter implements Dispositivo {
@@ -31,14 +30,5 @@ public class SamsungAdapter implements Dispositivo {
             break;
             default: throw new IllegalArgumentException("Comando inexistente");
         }
-    }
-
-    @Override
-    public void registrarObserver(DispositivoObserver observer) {
-    }
-
-    @Override
-    public void eliminarObserver() {
-
     }
 }

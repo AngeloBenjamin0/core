@@ -21,7 +21,7 @@ public class DispositivoDiscoverer {
             try {
                 cls = Class.forName(nombreClase);
             } catch (ClassNotFoundException e) {
-                throw new DispositivoDiscoveringException(String.format("Clase %s no encontrada", nombreArchivo), e);
+                throw new DiscovererException(String.format("Clase %s no encontrada", nombreArchivo), e);
             }
             if (Dispositivo.class.isAssignableFrom(cls)) {
                 try {

@@ -1,9 +1,9 @@
 package us;
 
 import org.junit.jupiter.api.Test;
+import org.pp2.DiscovererException;
 import org.pp2.Dispositivo;
 import org.pp2.DispositivoDiscoverer;
-import org.pp2.DispositivoDiscoveringException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class UserStory2Test {
     @Test
     void ca2NoEsDispositivo(){
         String path = FileSystems.getDefault().getPath("src", "test", "resources", "notDispositivo").toString();
-        DispositivoDiscoveringException excepcion = assertThrows(DispositivoDiscoveringException.class, () ->
+        DiscovererException excepcion = assertThrows(DiscovererException.class, () ->
                 new DispositivoDiscoverer().discover(path));
         assertEquals("La clase NotADispositivo no es de tipo Dispositivo, ni tampoco es una superclase ni una superinterfaz", excepcion.getMessage());
     }
@@ -59,7 +59,7 @@ public class UserStory2Test {
     @Test
     void ca6ClaseInexistente(){
         String path = FileSystems.getDefault().getPath("src", "test", "resources", "claseInexistente").toString();
-        DispositivoDiscoveringException excepcion = assertThrows(DispositivoDiscoveringException.class, () ->
+        DiscovererException excepcion = assertThrows(DiscovererException.class, () ->
                 new DispositivoDiscoverer().discover(path));
         assertEquals("Clase claseInexistente.class no encontrada", excepcion.getMessage());
     }
