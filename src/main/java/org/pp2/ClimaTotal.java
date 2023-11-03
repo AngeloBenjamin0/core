@@ -12,11 +12,17 @@ public class ClimaTotal {
 
     private final Map<String, Dispositivo> nombreDispositivoMap = new HashMap<>();
 
-    public ClimaTotal(String dispositivosPath, String configuracionHorariaPath) throws FileNotFoundException {
+    public ClimaTotal(String dispositivosPath, String dispositivoProxyFactoriesPath) throws FileNotFoundException {
         List<Dispositivo> dispositivosDescubiertos = new DispositivoDiscoverer().discover(dispositivosPath);
+        List<DispositivoProxyFactory> dispositivoProxyFactoriesDescubiertos = new DispositivoProxyFactoryDiscoverer().discover(dispositivoProxyFactoriesPath);
+
         for (Dispositivo dispositivo: dispositivosDescubiertos) {
-            Dispositivo dispositivoProxy = new DispositivoProxyFactory(configuracionHorariaPath).crear(dispositivo);
-            nombreDispositivoMap.put(dispositivoProxy.getNombre(), dispositivoProxy);
+            Dispositivo candidato = dispositivo;
+            for (DispositivoProxyFactory proxyFactory: dispositivoProxyFactoriesDescubiertos){
+                if (proxyFactory.esCandidato(dispositivo))
+                    candidato = proxyFactory.crear(candidato);
+            }
+            nombreDispositivoMap.put(candidato.getNombre(), candidato);
         }
     }
 

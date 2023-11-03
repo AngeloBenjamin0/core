@@ -5,7 +5,7 @@ import org.pp2.time.LocalTimeService;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class DispositivoProxy implements Dispositivo {
+public class HorarioProxy implements Dispositivo {
 
     private final Dispositivo dispositivo;
     private final LocalTime horarioInicio;
@@ -13,7 +13,7 @@ public class DispositivoProxy implements Dispositivo {
     private final LocalTimeService localTimeService;
     private DispositivoObserver observer;
 
-    public DispositivoProxy(Dispositivo dispositivo, int horarioInicio, int horarioFin, LocalTimeService localTimeService) {
+    public HorarioProxy(Dispositivo dispositivo, int horarioInicio, int horarioFin, LocalTimeService localTimeService) {
         this.dispositivo = dispositivo;
         this.horarioInicio = LocalTime.of(horarioInicio, 0, 0);
         this.horarioFin = LocalTime.of(horarioFin, 0 , 0);
