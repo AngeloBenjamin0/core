@@ -11,6 +11,7 @@ public class DispositivoProxyFactoryDiscoverer {
 
     public List<DispositivoProxyFactory> discover(String path) throws FileNotFoundException {
         // FIXME: Arreglar excepciones
+        // TODO: DRY
         List<DispositivoProxyFactory> drivers = new ArrayList<>();
         File directory = new File(path);
         if (!directory.exists()) throw new FileNotFoundException();
@@ -24,14 +25,13 @@ public class DispositivoProxyFactoryDiscoverer {
             } catch (ClassNotFoundException e) {
                 throw new DispositivoDiscoveringException(String.format("Clase %s no encontrada", nombreArchivo), e);
             }
-            if (!Dispositivo.class.isAssignableFrom(cls))
-                throw new DispositivoDiscoveringException(String.format("La clase %s no es de tipo Dispositivo, " +
-                        "ni tampoco es una superclase ni una superinterfaz", cls.getName()));
-            try {
-                drivers.add((DispositivoProxyFactory) cls.getDeclaredConstructor().newInstance());
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                     NoSuchMethodException e) {
-                throw new RuntimeException(e);
+            if (DispositivoProxyFactory.class.isAssignableFrom(cls)) {
+                try {
+                    drivers.add((DispositivoProxyFactory) cls.getDeclaredConstructor().newInstance());
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                         NoSuchMethodException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
         return drivers;

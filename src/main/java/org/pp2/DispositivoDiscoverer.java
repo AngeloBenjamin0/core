@@ -23,14 +23,13 @@ public class DispositivoDiscoverer {
             } catch (ClassNotFoundException e) {
                 throw new DispositivoDiscoveringException(String.format("Clase %s no encontrada", nombreArchivo), e);
             }
-            if (!Dispositivo.class.isAssignableFrom(cls))
-                throw new DispositivoDiscoveringException(String.format("La clase %s no es de tipo Dispositivo, " +
-                        "ni tampoco es una superclase ni una superinterfaz", cls.getName()));
-            try {
-                drivers.add((Dispositivo) cls.getDeclaredConstructor().newInstance());
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                     NoSuchMethodException e) {
-                throw new RuntimeException(e);
+            if (Dispositivo.class.isAssignableFrom(cls)) {
+                try {
+                    drivers.add((Dispositivo) cls.getDeclaredConstructor().newInstance());
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                         NoSuchMethodException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
         return drivers;
