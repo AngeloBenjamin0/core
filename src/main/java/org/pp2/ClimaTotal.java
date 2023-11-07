@@ -16,13 +16,14 @@ public class ClimaTotal {
         List<Dispositivo> dispositivosDescubiertos = new DispositivoDiscoverer().discover(dispositivosPath);
         List<DispositivoProxyFactory> dispositivoProxyFactoriesDescubiertos = new DispositivoProxyFactoryDiscoverer().discover(dispositivoProxyFactoriesPath);
 
-        for (Dispositivo dispositivo: dispositivosDescubiertos) {
-            Dispositivo candidato = dispositivo;
-            for (DispositivoProxyFactory proxyFactory: dispositivoProxyFactoriesDescubiertos){
-                if (proxyFactory.esCandidato(dispositivo))
-                    candidato = proxyFactory.crear(candidato);
-            }
-            nombreDispositivoMap.put(candidato.getNombre(), candidato);
+        for (Dispositivo dispositivo : dispositivosDescubiertos){
+            List<DispositivoProxyFactory> proxyCompatibles = new DispositivoProxyFactorySelector(dispositivoProxyFactoriesDescubiertos)
+                    .selectCompatibles(dispositivo);
+            Dispositivo dispositivoProxy = dispositivo;
+            for (DispositivoProxyFactory proxyFactory: proxyCompatibles)
+                dispositivoProxy = proxyFactory.crear(dispositivoProxy);
+
+            nombreDispositivoMap.put(dispositivoProxy.getNombre(), dispositivoProxy);
         }
     }
 
