@@ -24,11 +24,10 @@ public class UserStory2Test {
     }
 
     @Test
-    void ca2NoEsDispositivo(){
+    void ca2NoEsDispositivo() throws FileNotFoundException {
         String path = FileSystems.getDefault().getPath("src", "test", "resources", "notDispositivo").toString();
-        DiscovererException excepcion = assertThrows(DiscovererException.class, () ->
-                new DispositivoDiscoverer().discover(path));
-        assertEquals("La clase NotADispositivo no es de tipo Dispositivo, ni tampoco es una superclase ni una superinterfaz", excepcion.getMessage());
+        List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path);
+        assertTrue(dispositivos.isEmpty());
     }
 
     @Test

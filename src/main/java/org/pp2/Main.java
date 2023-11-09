@@ -1,15 +1,12 @@
 package org.pp2;
 
-import java.io.FileNotFoundException;
-
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-        String proxyFactoriesPath = args[0];
-        String dispositivosPath = args[1];
-        String nombreDispositivo = args[2];
-        String comando = args[3];
+    public static void main(String[] args){
+        String especificacion = args[0];
+        String nombreDispositivo = args[1];
+        String comando = args[2];
 
-        ClimaTotal climaTotal = new ClimaTotal(dispositivosPath, proxyFactoriesPath);
+        ClimaTotal climaTotal = new ClimaTotal(especificacion);
         climaTotal.ejecutarComando(nombreDispositivo, comando);
     }
 }

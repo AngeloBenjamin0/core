@@ -3,7 +3,7 @@ package us;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.pp2.ClimaTotal;
+import org.pp2.ClimaTotalOld;
 
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystems;
@@ -13,14 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UserStory1Test {
-	private ClimaTotal climaTotal;
+	private ClimaTotalOld climaTotal;
 
 	@BeforeEach
 	void setUp() throws FileNotFoundException {
 		String dispositivosPath = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivo").toString();
 
 
-		climaTotal = new ClimaTotal(dispositivosPath, "");
+		climaTotal = new ClimaTotalOld(dispositivosPath);
 	}
 
     @Test
