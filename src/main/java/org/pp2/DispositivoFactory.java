@@ -50,6 +50,7 @@ public class DispositivoFactory {
             }
             @Override
             public void ejecutar(String comando) {
+                if (finalDispositivo == null) throw new IllegalArgumentException("Comando inexistente");
                 finalDispositivo.ejecutar(comando);
             }
         };
