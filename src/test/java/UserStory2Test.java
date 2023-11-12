@@ -1,5 +1,3 @@
-package us;
-
 import org.junit.jupiter.api.Test;
 import org.pp2.DiscovererException;
 import org.pp2.Dispositivo;

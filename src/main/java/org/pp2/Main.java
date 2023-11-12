@@ -8,7 +8,7 @@ public class Main {
         String nombreDispositivo = args[1];
         String comando = args[2];
 
-        ClimaTotal climaTotal = new ClimaTotal(especificacion);
+        ClimaTotal climaTotal = new ClimaTotalFactory(especificacion).crear();
         climaTotal.ejecutarComando(nombreDispositivo, comando);
     }
 }

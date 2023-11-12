@@ -1,6 +1,5 @@
 import mock.AireAcondicionadoSamsungMock;
 import org.pp2.Dispositivo;
-import us.RegistroResultadoEjecucion;
 
 public class SamsungAdapter implements Dispositivo {
 
