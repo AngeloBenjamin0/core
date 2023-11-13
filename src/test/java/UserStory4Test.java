@@ -15,10 +15,10 @@ public class UserStory4Test {
         String path = FileSystems.getDefault().getPath("especificaciones", "especificacionCompuesta.json").toString();
         ClimaTotal climaTotal = new ClimaTotalFactory(path).crear();
 
-        assertTrue(RegistroResultadoEjecucion.getResultadoEjecucion().isEmpty());
+        assertTrue(RegistroEjecucionComando.getEjecucionComandos().isEmpty());
         climaTotal.ejecutarComando("d1", "ENCENDER");
 
-        assertEquals(List.of("INFO - Se ejecuta comando ENCENDER en dispositivo d1", "Se ejecuta comando ENCENDER"), RegistroResultadoEjecucion.getResultadoEjecucion());
+        assertEquals(List.of("INFO - Se ejecuta comando ENCENDER en dispositivo d1", "Se ejecuta comando ENCENDER"), RegistroEjecucionComando.getEjecucionComandos());
     }
 
     @Test

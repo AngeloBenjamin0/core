@@ -16,11 +16,11 @@ public class UserStory3Test {
     @Test
     public void ca1EspecificacionValida() throws FileNotFoundException {
         String path = FileSystems.getDefault().getPath("especificaciones", "especificacion.json").toString();
-        assertTrue(RegistroResultadoEjecucion.getResultadoEjecucion().isEmpty());
+        assertTrue(RegistroEjecucionComando.getEjecucionComandos().isEmpty());
         climaTotal = new ClimaTotalFactory(path).crear();
 
         climaTotal.ejecutarComando("d1", "ENCENDER");
-        assertEquals(List.of("Se ejecuta comando ENCENDER"), RegistroResultadoEjecucion.getResultadoEjecucion());
+        assertEquals(List.of("Se ejecuta comando ENCENDER"), RegistroEjecucionComando.getEjecucionComandos());
     }
 
     @Test
@@ -66,12 +66,11 @@ public class UserStory3Test {
                 climaTotal = new ClimaTotalFactory(path).crear()
         );
         assertEquals(FileNotFoundException.class, excepcion.getClass());
-
     }
 
     @AfterEach
     void tearDown(){
-        RegistroResultadoEjecucion.clearResultadoEjecucion();
+        RegistroEjecucionComando.clearEjecucionComandos();
     }
 
 }

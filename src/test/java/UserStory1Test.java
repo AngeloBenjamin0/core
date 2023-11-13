@@ -23,7 +23,7 @@ public class UserStory1Test {
     @Test
     void ca1EncenderDispositivo() {
 		climaTotal.ejecutarComando("d1", "ENCENDER");
-		assertEquals(List.of("Se ejecuta comando ENCENDER"), RegistroResultadoEjecucion.getResultadoEjecucion());
+		assertEquals(List.of("Se ejecuta comando ENCENDER"), RegistroEjecucionComando.getEjecucionComandos());
     }
 
     @Test
@@ -46,7 +46,7 @@ public class UserStory1Test {
 
 	@AfterEach
 	void tearDown(){
-		RegistroResultadoEjecucion.clearResultadoEjecucion();
+		RegistroEjecucionComando.clearEjecucionComandos();
 	}
 
 }

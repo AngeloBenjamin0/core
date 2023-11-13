@@ -20,11 +20,11 @@ public class SamsungAdapter implements Dispositivo {
         switch (comando){
             case "APAGAR": {
                 aireAcondicionadoSamsungMock.apagar();
-                RegistroResultadoEjecucion.addResultadoEjecucion("Se ejecuta comando APAGAR");
+                RegistroEjecucionComando.addEjecucionComando("Se ejecuta comando APAGAR");
             } break;
             case "ENCENDER": {
                 aireAcondicionadoSamsungMock.encender();
-                RegistroResultadoEjecucion.addResultadoEjecucion("Se ejecuta comando ENCENDER");
+                RegistroEjecucionComando.addEjecucionComando("Se ejecuta comando ENCENDER");
             }
             break;
             default: throw new IllegalArgumentException("Comando inexistente");

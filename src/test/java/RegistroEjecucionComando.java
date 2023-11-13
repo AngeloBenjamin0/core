@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegistroResultadoEjecucion {
+public class RegistroEjecucionComando {
     private static final ThreadLocal<List<String>> CONTEXTO = new ThreadLocal<>();
 
-    public static List<String> getResultadoEjecucion(){
+    public static List<String> getEjecucionComandos(){
         return getContexto().get();
     }
 
-    public static void addResultadoEjecucion(String resultadoEjecucion){
-        getContexto().get().add(resultadoEjecucion);
+    public static void addEjecucionComando(String ejecucionComando){
+        getContexto().get().add(ejecucionComando);
     }
 
-    public static void clearResultadoEjecucion(){
+    public static void clearEjecucionComandos(){
         getContexto().set(new ArrayList<>());
     }
 
