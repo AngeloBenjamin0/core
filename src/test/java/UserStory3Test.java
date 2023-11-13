@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.pp2.ClimaTotal;
 import org.pp2.ClimaTotalFactory;
@@ -66,6 +67,11 @@ public class UserStory3Test {
         );
         assertEquals(FileNotFoundException.class, excepcion.getClass());
 
+    }
+
+    @AfterEach
+    void tearDown(){
+        RegistroResultadoEjecucion.clearResultadoEjecucion();
     }
 
 }
