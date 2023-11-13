@@ -15,7 +15,7 @@ public class UserStory3Test {
 
     @Test
     public void ca1EspecificacionValida() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "especificaciones", "especificacion.json").toString();
+        String path = FileSystems.getDefault().getPath("especificaciones", "especificacion.json").toString();
         assertTrue(RegistroResultadoEjecucion.getResultadoEjecucion().isEmpty());
         climaTotal = new ClimaTotalFactory(path).crear();
 
@@ -25,7 +25,7 @@ public class UserStory3Test {
 
     @Test
     public void ca2EspecificacionVacia() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "especificaciones", "especificacionVacia.json").toString();
+        String path = FileSystems.getDefault().getPath("especificaciones", "especificacionVacia.json").toString();
         climaTotal = new ClimaTotalFactory(path).crear();
 
         IllegalArgumentException excepcion = assertThrows(IllegalArgumentException.class, () ->
@@ -37,7 +37,7 @@ public class UserStory3Test {
 
     @Test
     public void ca3DispositivoVacio() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "especificaciones", "sinDispositivo.json").toString();
+        String path = FileSystems.getDefault().getPath("especificaciones", "sinDispositivo.json").toString();
         climaTotal = new ClimaTotalFactory(path).crear();
 
         IllegalArgumentException excepcion = assertThrows(IllegalArgumentException.class, () ->
@@ -49,7 +49,7 @@ public class UserStory3Test {
 
     @Test
     public void ca4MalFormato(){
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "especificaciones", "malFormato.json").toString();
+        String path = FileSystems.getDefault().getPath("especificaciones", "malFormato.json").toString();
 
         RuntimeException excepcion = assertThrows(RuntimeException.class, () ->
                 climaTotal = new ClimaTotalFactory(path).crear()
@@ -60,7 +60,7 @@ public class UserStory3Test {
 
     @Test
     public void ca5EspecificacionInexistente(){
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "especificaciones", "inexistente.json").toString();
+        String path = FileSystems.getDefault().getPath("especificaciones", "inexistente.json").toString();
 
         FileNotFoundException excepcion = assertThrows(FileNotFoundException.class, () ->
                 climaTotal = new ClimaTotalFactory(path).crear()

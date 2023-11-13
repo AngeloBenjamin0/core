@@ -17,20 +17,20 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserStory2Test {
     @Test
     void ca1DirectorioInexistente(){
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "directorioInexistente").toString();
+        String path = FileSystems.getDefault().getPath("directorioInexistente").toString();
         assertThrows(FileNotFoundException.class, () -> new DispositivoDiscoverer().discover(path));
     }
 
     @Test
     void ca2NoEsDispositivo() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "notDispositivo").toString();
+        String path = FileSystems.getDefault().getPath("notDispositivo").toString();
         List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path);
         assertTrue(dispositivos.isEmpty());
     }
 
     @Test
     void ca3DirectorioVacio() throws IOException {
-        Path path = FileSystems.getDefault().getPath("src", "test", "resources", "directorioVacio");
+        Path path = FileSystems.getDefault().getPath("directorioVacio");
         Files.createDirectories(path);
         List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path.toString());
         assertTrue(dispositivos.isEmpty());
@@ -40,14 +40,14 @@ public class UserStory2Test {
 
     @Test
     void ca4UnicoDispositivo() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "dispositivo").toString();
+        String path = FileSystems.getDefault().getPath("dispositivo").toString();
         List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path);
         assertEquals(1, dispositivos.size());
         assertEquals(Set.of("d1"), dispositivos.stream().map(Dispositivo::getNombre).collect(Collectors.toSet()));
     }
     @Test
     void ca5MasDeUnDispositivo() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "multipleDispositivos").toString();
+        String path = FileSystems.getDefault().getPath("multipleDispositivos").toString();
         List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path);
         assertEquals(2, dispositivos.size());
         assertEquals(Set.of("d1", "d2"), dispositivos.stream().map(Dispositivo::getNombre).collect(Collectors.toSet()));
@@ -55,7 +55,7 @@ public class UserStory2Test {
 
     @Test
     void ca6ClaseInexistente(){
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "claseInexistente").toString();
+        String path = FileSystems.getDefault().getPath("claseInexistente").toString();
         DiscovererException excepcion = assertThrows(DiscovererException.class, () ->
                 new DispositivoDiscoverer().discover(path));
         assertEquals("Clase claseInexistente.class no encontrada", excepcion.getMessage());

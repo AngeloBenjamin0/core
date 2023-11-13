@@ -12,7 +12,7 @@ public class UserStory4Test {
 
     @Test
     public void ca1DispositivoCompuesto() throws FileNotFoundException {
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "especificaciones", "especificacionCompuesta.json").toString();
+        String path = FileSystems.getDefault().getPath("especificaciones", "especificacionCompuesta.json").toString();
         ClimaTotal climaTotal = new ClimaTotalFactory(path).crear();
 
         assertTrue(RegistroResultadoEjecucion.getResultadoEjecucion().isEmpty());
@@ -23,7 +23,7 @@ public class UserStory4Test {
 
     @Test
     public void ca2NoEsDispositivo(){
-        String path = FileSystems.getDefault().getPath("src", "test", "resources", "especificaciones", "unoNoEsDispositivo.json").toString();
+        String path = FileSystems.getDefault().getPath("especificaciones", "unoNoEsDispositivo.json").toString();
 
         RuntimeException excepcion = assertThrows(RuntimeException.class, () ->
                 new ClimaTotalFactory(path).crear()
