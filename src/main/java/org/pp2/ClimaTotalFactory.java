@@ -23,7 +23,7 @@ public class ClimaTotalFactory {
                     .map(nombreClase -> new DispositivoClassFactory().crear(nombreClase))
                     .collect(Collectors.toList());
 
-            result.add(new DispositivoFactory(especificacion.getKey(), clasesDispositivo).crear());
+            result.add(new DispositivoFactory().crear(especificacion.getKey(), clasesDispositivo));
         }
         return new ClimaTotal(result);
     }
