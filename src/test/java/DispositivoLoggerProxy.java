@@ -15,7 +15,7 @@ public class DispositivoLoggerProxy implements Dispositivo {
 
     @Override
     public void ejecutar(String comando) {
-        String log = String.format("INFO - Se ejecuta comando %s en dispositivo %s", comando, this.getNombre());
+        String log = String.format("INFO - %s", comando);
         System.out.println(log);
         RegistroEjecucionComando.addEjecucionComando(log);
 

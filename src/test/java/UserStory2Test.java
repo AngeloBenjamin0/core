@@ -43,14 +43,14 @@ public class UserStory2Test {
         String path = FileSystems.getDefault().getPath("dispositivo").toString();
         List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path);
         assertEquals(1, dispositivos.size());
-        assertEquals(Set.of("d1"), dispositivos.stream().map(Dispositivo::getNombre).collect(Collectors.toSet()));
+        assertEquals(Set.of("d"), dispositivos.stream().map(Dispositivo::getNombre).collect(Collectors.toSet()));
     }
     @Test
     void ca5MasDeUnDispositivo() throws FileNotFoundException {
         String path = FileSystems.getDefault().getPath("multipleDispositivos").toString();
         List<Dispositivo> dispositivos = new DispositivoDiscoverer().discover(path);
         assertEquals(2, dispositivos.size());
-        assertEquals(Set.of("d1", "d2"), dispositivos.stream().map(Dispositivo::getNombre).collect(Collectors.toSet()));
+        assertEquals(Set.of("d", "d2"), dispositivos.stream().map(Dispositivo::getNombre).collect(Collectors.toSet()));
     }
 
     @Test

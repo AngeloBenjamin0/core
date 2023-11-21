@@ -7,8 +7,7 @@ import org.pp2.Dispositivo;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserStory1Test {
 	private ClimaTotal climaTotal;
@@ -21,28 +20,42 @@ public class UserStory1Test {
 	}
 
     @Test
-    void ca1EncenderDispositivo() {
-		climaTotal.ejecutarComando("d1", "ENCENDER");
-		assertEquals(List.of("Se ejecuta comando ENCENDER"), RegistroEjecucionComando.getEjecucionComandos());
+    void ca1EjecucionComandoVacío() {
+		assertTrue(RegistroEjecucionComando.getEjecucionComandos().isEmpty());
     }
 
-    @Test
-    void ca2ComandoInexistente() {
+	@Test
+	void ca2EncenderDispositivo() {
+		climaTotal.ejecutarComando("d", "ENCENDER");
+		assertEquals(List.of("ENCENDER"), RegistroEjecucionComando.getEjecucionComandos());
+	}
+
+	@Test
+	void ca3MultiplesComandos() {
+		climaTotal.ejecutarComando("d", "ENCENDER");
+		climaTotal.ejecutarComando("d", "ENCENDER");
+		assertEquals(List.of("ENCENDER", "ENCENDER"), RegistroEjecucionComando.getEjecucionComandos());
+	}
+
+
+	@Test
+    void ca4ComandoInexistente() {
     	IllegalArgumentException excepcion = assertThrows(IllegalArgumentException.class, () ->
-				climaTotal.ejecutarComando("d1", "comandoInexistente")
+				climaTotal.ejecutarComando("d", "comandoInexistente")
     	);
     	assertEquals(IllegalArgumentException.class, excepcion.getClass());
     	assertEquals("Comando inexistente", excepcion.getMessage());
     }
 
 	@Test
-	void ca3DispositivoInexistente(){
+	void ca5DispositivoInexistente(){
 		IllegalArgumentException excepcion = assertThrows(IllegalArgumentException.class, () ->
-				climaTotal.ejecutarComando("d2", "ENCENDER")
+				climaTotal.ejecutarComando("noExiste", "ENCENDER")
 		);
 		assertEquals(IllegalArgumentException.class, excepcion.getClass());
 		assertEquals("Dispositivo inexistente", excepcion.getMessage());
 	}
+
 
 	@AfterEach
 	void tearDown(){

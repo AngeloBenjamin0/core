@@ -12,7 +12,7 @@ public class SamsungAdapter implements Dispositivo {
 
     @Override
     public String getNombre() {
-        return "d1";
+        return "d";
     }
 
     @Override
@@ -20,11 +20,11 @@ public class SamsungAdapter implements Dispositivo {
         switch (comando){
             case "APAGAR": {
                 aireAcondicionadoSamsungMock.apagar();
-                RegistroEjecucionComando.addEjecucionComando("Se ejecuta comando APAGAR");
+                RegistroEjecucionComando.addEjecucionComando("APAGAR");
             } break;
             case "ENCENDER": {
                 aireAcondicionadoSamsungMock.encender();
-                RegistroEjecucionComando.addEjecucionComando("Se ejecuta comando ENCENDER");
+                RegistroEjecucionComando.addEjecucionComando("ENCENDER");
             }
             break;
             default: throw new IllegalArgumentException("Comando inexistente");

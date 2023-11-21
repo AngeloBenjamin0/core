@@ -11,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserStory4Test {
 
     @Test
-    public void ca1DispositivoCompuesto() throws FileNotFoundException {
+    public void ca1EspecificacionCompuesta() throws FileNotFoundException {
         String path = FileSystems.getDefault().getPath("especificaciones", "especificacionCompuesta.json").toString();
         ClimaTotal climaTotal = new ClimaTotalFactory(path).crear();
 
         assertTrue(RegistroEjecucionComando.getEjecucionComandos().isEmpty());
-        climaTotal.ejecutarComando("d1", "ENCENDER");
+        climaTotal.ejecutarComando("d", "ENCENDER");
 
-        assertEquals(List.of("INFO - Se ejecuta comando ENCENDER en dispositivo d1", "Se ejecuta comando ENCENDER"), RegistroEjecucionComando.getEjecucionComandos());
+        assertEquals(List.of("INFO - ENCENDER", "ENCENDER"), RegistroEjecucionComando.getEjecucionComandos());
     }
 
     @Test
@@ -31,4 +31,27 @@ public class UserStory4Test {
         assertEquals(RuntimeException.class, excepcion.getClass());
         assertEquals("La clase NotADispositivo no es un Dispositivo", excepcion.getMessage());
     }
+
+    @Test
+    public void ca3DosIntegracionesConcretas(){
+        String path = FileSystems.getDefault().getPath("especificaciones", "especificacionCompuestaConcreta.json").toString();
+
+        IllegalArgumentException excepcion = assertThrows(IllegalArgumentException.class, () ->
+                new ClimaTotalFactory(path).crear()
+        );
+        assertEquals(IllegalArgumentException.class, excepcion.getClass());
+        assertEquals("SamsungAdapter no tiene un constructor con un parámetro de tipo Dispositivo.", excepcion.getMessage());
+    }
+
+    @Test
+    public void ca4DosIntegracionesConReferencias(){
+        String path = FileSystems.getDefault().getPath("especificaciones", "especificacionCompuestaConReferencia.json").toString();
+
+        IllegalArgumentException excepcion = assertThrows(IllegalArgumentException.class, () ->
+                new ClimaTotalFactory(path).crear()
+        );
+        assertEquals(IllegalArgumentException.class, excepcion.getClass());
+        assertEquals("DispositivoLoggerProxy no debe recibir parámetros en el constructor", excepcion.getMessage());
+    }
+
 }

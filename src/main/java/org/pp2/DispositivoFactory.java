@@ -15,7 +15,7 @@ public class DispositivoFactory {
                     result = dispositivoClass.getDeclaredConstructor().newInstance();
                 } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                          NoSuchMethodException e) {
-                    throw new RuntimeException(e);
+                    throw new IllegalArgumentException(String.format("%s no debe recibir parámetros en el constructor", dispositivoClass.getSimpleName()), e);
                 }
                 continue;
             }
@@ -23,7 +23,7 @@ public class DispositivoFactory {
             try {
                 dispositivoConstructor = dispositivoClass.getDeclaredConstructor(Dispositivo.class);
             } catch (NoSuchMethodException e) {
-                throw new RuntimeException(e);
+                throw new IllegalArgumentException(String.format("%s no tiene un constructor con un parámetro de tipo Dispositivo.", dispositivoClass.getSimpleName()), e);
             }
             try {
                 result = dispositivoConstructor.newInstance(result);

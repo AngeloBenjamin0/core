@@ -20,7 +20,7 @@ public class UserStory3Test {
         climaTotal = new ClimaTotalFactory(path).crear();
 
         climaTotal.ejecutarComando("d1", "ENCENDER");
-        assertEquals(List.of("Se ejecuta comando ENCENDER"), RegistroEjecucionComando.getEjecucionComandos());
+        assertEquals(List.of("ENCENDER"), RegistroEjecucionComando.getEjecucionComandos());
     }
 
     @Test
@@ -36,12 +36,12 @@ public class UserStory3Test {
     }
 
     @Test
-    public void ca3DispositivoVacio() throws FileNotFoundException {
+    public void ca3SinDispositivo() throws FileNotFoundException {
         String path = FileSystems.getDefault().getPath("especificaciones", "sinDispositivo.json").toString();
         climaTotal = new ClimaTotalFactory(path).crear();
 
         IllegalArgumentException excepcion = assertThrows(IllegalArgumentException.class, () ->
-                climaTotal.ejecutarComando("d1", "ENCENDER")
+                climaTotal.ejecutarComando("d", "ENCENDER")
         );
         assertEquals(IllegalArgumentException.class, excepcion.getClass());
         assertEquals("Comando inexistente", excepcion.getMessage());
